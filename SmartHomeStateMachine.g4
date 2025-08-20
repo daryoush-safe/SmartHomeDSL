@@ -42,11 +42,11 @@ deviceType
 
 // State Declarations
 stateDeclaration
-    : 'state' IDENTIFIER '{' actionList? '}'
+    : 'state' stateName '{' (action (',' action)*)? '}'
     ;
 
-actionList
-    : action (',' action)*
+stateName
+    : IDENTIFIER
     ;
 
 action
@@ -56,32 +56,36 @@ action
     ;
 
 deviceAction
-    : IDENTIFIER '.' deviceMethod '(' (expression (',' expression)*)? ')'
+    : deviceName '.' deviceMethod '(' (expression (',' expression)*)? ')'
     ;
 
 deviceMethod
-    : 'on'
-    | 'off'
-    | 'toggle'
-    | 'set'
-    | 'read'
-    | 'write'
-    | 'move'
-    | 'display'
-    | 'beep'
-    | 'fade'
-    | 'blink'
-    | 'setColor'
-    | 'setBrightness'
-    | 'getDistance'
-    | 'getTemperature'
-    | 'getHumidity'
-    | 'isPressed'
-    | 'isMotionDetected'
+        : 'on'
+        | 'off'
+        | 'toggle'
+        | 'set'
+        | 'read'
+        | 'write'
+        | 'move'
+        | 'display'
+        | 'beep'
+        | 'fade'
+        | 'blink'
+        | 'setColor'
+        | 'setBrightness'
+        | 'getDistance'
+        | 'getTemperature'
+        | 'getHumidity'
+        | 'isPressed'
+        | 'isMotionDetected'
     ;
 
 delayAction
-    : 'delay' '(' NUMBER ')'
+    : 'delay' '(' delayParameter ')'
+    ;
+
+delayParameter
+    : NUMBER
     ;
 
 variableAssignment

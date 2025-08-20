@@ -62,12 +62,12 @@ class SmartHomeStateMachineListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SmartHomeStateMachineParser#actionList.
-    def enterActionList(self, ctx:SmartHomeStateMachineParser.ActionListContext):
+    # Enter a parse tree produced by SmartHomeStateMachineParser#stateName.
+    def enterStateName(self, ctx:SmartHomeStateMachineParser.StateNameContext):
         pass
 
-    # Exit a parse tree produced by SmartHomeStateMachineParser#actionList.
-    def exitActionList(self, ctx:SmartHomeStateMachineParser.ActionListContext):
+    # Exit a parse tree produced by SmartHomeStateMachineParser#stateName.
+    def exitStateName(self, ctx:SmartHomeStateMachineParser.StateNameContext):
         pass
 
 
@@ -104,6 +104,15 @@ class SmartHomeStateMachineListener(ParseTreeListener):
 
     # Exit a parse tree produced by SmartHomeStateMachineParser#delayAction.
     def exitDelayAction(self, ctx:SmartHomeStateMachineParser.DelayActionContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#delayParameter.
+    def enterDelayParameter(self, ctx:SmartHomeStateMachineParser.DelayParameterContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#delayParameter.
+    def exitDelayParameter(self, ctx:SmartHomeStateMachineParser.DelayParameterContext):
         pass
 
 

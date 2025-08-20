@@ -39,8 +39,8 @@ class SmartHomeStateMachineVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SmartHomeStateMachineParser#actionList.
-    def visitActionList(self, ctx:SmartHomeStateMachineParser.ActionListContext):
+    # Visit a parse tree produced by SmartHomeStateMachineParser#stateName.
+    def visitStateName(self, ctx:SmartHomeStateMachineParser.StateNameContext):
         return self.visitChildren(ctx)
 
 
@@ -61,6 +61,11 @@ class SmartHomeStateMachineVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SmartHomeStateMachineParser#delayAction.
     def visitDelayAction(self, ctx:SmartHomeStateMachineParser.DelayActionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#delayParameter.
+    def visitDelayParameter(self, ctx:SmartHomeStateMachineParser.DelayParameterContext):
         return self.visitChildren(ctx)
 
 

@@ -11,6 +11,8 @@ class CustomListener(SmartHomeStateMachineListener):
             'stateDeclaration',
             'transitionDeclaration',
             'deviceDeclaration',
+            'deviceAction',
+            'delayAction',
         ]
 
         # Rules with binary operators (handled specially in AST)
@@ -50,3 +52,9 @@ class CustomListener(SmartHomeStateMachineListener):
 
     def exitTransitionDeclaration(self, ctx:SmartHomeStateMachineParser.TransitionDeclarationContext):
         make_ast_subtree(self.ast, ctx, "transition_dec", keep_node=True)
+
+    def exitDelayAction(self, ctx:SmartHomeStateMachineParser.DelayActionContext):
+        make_ast_subtree(self.ast, ctx, "delay_action", keep_node=True)
+
+    def exitDeviceAction(self, ctx:SmartHomeStateMachineParser.DeviceActionContext):
+        make_ast_subtree(self.ast, ctx, "device_action", keep_node=True)
