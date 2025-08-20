@@ -31,7 +31,7 @@ def main(args):
 
 if __name__ == '__main__':
 	argparser = argparse.ArgumentParser()
-	argparser.add_argument('-i', '--input', help='Input source', default=f'test2.txt')
+	argparser.add_argument('-i', '--input', help='Input source', default=f'test.txt')
 	argparser.add_argument('-o', '--output', help='Output path', default=f'out.txt')
 	args = argparser.parse_args()
 	main(args)

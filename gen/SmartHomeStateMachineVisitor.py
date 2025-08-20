@@ -89,6 +89,11 @@ class SmartHomeStateMachineVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SmartHomeStateMachineParser#allStates.
+    def visitAllStates(self, ctx:SmartHomeStateMachineParser.AllStatesContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SmartHomeStateMachineParser#condition.
     def visitCondition(self, ctx:SmartHomeStateMachineParser.ConditionContext):
         return self.visitChildren(ctx)

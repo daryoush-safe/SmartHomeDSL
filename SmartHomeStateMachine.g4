@@ -87,7 +87,11 @@ variableName
 
 // Transition Declarations
 transitionDeclaration
-    : 'transition' IDENTIFIER '->' IDENTIFIER 'when' condition ';'
+    : 'transition' (stateName | allStates) '->' stateName 'when' condition ';'
+    ;
+
+allStates
+    : '*'
     ;
 
 condition

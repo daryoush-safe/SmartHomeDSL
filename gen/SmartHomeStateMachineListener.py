@@ -152,6 +152,15 @@ class SmartHomeStateMachineListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SmartHomeStateMachineParser#allStates.
+    def enterAllStates(self, ctx:SmartHomeStateMachineParser.AllStatesContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#allStates.
+    def exitAllStates(self, ctx:SmartHomeStateMachineParser.AllStatesContext):
+        pass
+
+
     # Enter a parse tree produced by SmartHomeStateMachineParser#condition.
     def enterCondition(self, ctx:SmartHomeStateMachineParser.ConditionContext):
         pass
