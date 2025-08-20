@@ -18,6 +18,11 @@ class CustomListener(SmartHomeStateMachineListener):
         # Rules with binary operators (handled specially in AST)
         self.binary_operator_list = [
             'expression',
+            'variableAssignment',
+            'andExpression',
+            'comparisonExpression',
+            'arithmeticExpression',
+            'term'
         ]
 
         # Rules that create a new scope or block

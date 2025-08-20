@@ -54,8 +54,13 @@ class SmartHomeStateMachineVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by SmartHomeStateMachineParser#deviceMethod.
-    def visitDeviceMethod(self, ctx:SmartHomeStateMachineParser.DeviceMethodContext):
+    # Visit a parse tree produced by SmartHomeStateMachineParser#actionMethod.
+    def visitActionMethod(self, ctx:SmartHomeStateMachineParser.ActionMethodContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#getterMethod.
+    def visitGetterMethod(self, ctx:SmartHomeStateMachineParser.GetterMethodContext):
         return self.visitChildren(ctx)
 
 
@@ -74,6 +79,11 @@ class SmartHomeStateMachineVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by SmartHomeStateMachineParser#variableName.
+    def visitVariableName(self, ctx:SmartHomeStateMachineParser.VariableNameContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by SmartHomeStateMachineParser#transitionDeclaration.
     def visitTransitionDeclaration(self, ctx:SmartHomeStateMachineParser.TransitionDeclarationContext):
         return self.visitChildren(ctx)
@@ -86,6 +96,31 @@ class SmartHomeStateMachineVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SmartHomeStateMachineParser#expression.
     def visitExpression(self, ctx:SmartHomeStateMachineParser.ExpressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#andExpression.
+    def visitAndExpression(self, ctx:SmartHomeStateMachineParser.AndExpressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#comparisonExpression.
+    def visitComparisonExpression(self, ctx:SmartHomeStateMachineParser.ComparisonExpressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#arithmeticExpression.
+    def visitArithmeticExpression(self, ctx:SmartHomeStateMachineParser.ArithmeticExpressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#term.
+    def visitTerm(self, ctx:SmartHomeStateMachineParser.TermContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#factor.
+    def visitFactor(self, ctx:SmartHomeStateMachineParser.FactorContext):
         return self.visitChildren(ctx)
 
 
