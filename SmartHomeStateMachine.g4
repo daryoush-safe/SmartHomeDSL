@@ -7,7 +7,15 @@ program
 
 // Device Declarations
 deviceDeclaration
-    : 'device' IDENTIFIER ':' deviceType ('pin' NUMBER)?';'
+    : 'device' deviceName ':' deviceType ('pin' pinDeclaration)?';'
+    ;
+
+deviceName
+    : IDENTIFIER
+    ;
+
+pinDeclaration
+    : NUMBER
     ;
 
 deviceType

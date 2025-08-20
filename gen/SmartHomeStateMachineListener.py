@@ -1,4 +1,4 @@
-# Generated from C:/compiler_project/SmartHomeStateMachine.g4 by ANTLR 4.13.2
+# Generated from C:/University/compiler/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .SmartHomeStateMachineParser import SmartHomeStateMachineParser
@@ -23,6 +23,24 @@ class SmartHomeStateMachineListener(ParseTreeListener):
 
     # Exit a parse tree produced by SmartHomeStateMachineParser#deviceDeclaration.
     def exitDeviceDeclaration(self, ctx:SmartHomeStateMachineParser.DeviceDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#deviceName.
+    def enterDeviceName(self, ctx:SmartHomeStateMachineParser.DeviceNameContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#deviceName.
+    def exitDeviceName(self, ctx:SmartHomeStateMachineParser.DeviceNameContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#pinDeclaration.
+    def enterPinDeclaration(self, ctx:SmartHomeStateMachineParser.PinDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#pinDeclaration.
+    def exitPinDeclaration(self, ctx:SmartHomeStateMachineParser.PinDeclarationContext):
         pass
 
 

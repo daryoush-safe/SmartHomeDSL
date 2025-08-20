@@ -1,4 +1,4 @@
-# Generated from C:/compiler_project/SmartHomeStateMachine.g4 by ANTLR 4.13.2
+# Generated from C:/University/compiler/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -10,58 +10,60 @@ else:
 
 def serializedATN():
     return [
-        4,1,75,153,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,75,161,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
-        1,0,1,0,1,0,5,0,32,8,0,10,0,12,0,35,9,0,1,0,1,0,1,1,1,1,1,1,1,1,
-        1,1,1,1,3,1,45,8,1,1,1,1,1,1,2,1,2,1,3,1,3,1,3,1,3,3,3,55,8,3,1,
-        3,1,3,1,4,1,4,1,4,5,4,62,8,4,10,4,12,4,65,9,4,1,5,1,5,1,5,3,5,70,
-        8,5,1,6,1,6,1,6,1,6,1,6,1,6,1,6,5,6,79,8,6,10,6,12,6,82,9,6,3,6,
-        84,8,6,1,6,1,6,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,9,1,10,
-        1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,11,1,11,1,12,1,12,1,12,1,12,
-        1,12,1,12,1,12,1,12,1,12,1,12,1,12,1,12,3,12,121,8,12,1,12,1,12,
-        1,12,1,12,1,12,1,12,1,12,1,12,1,12,5,12,132,8,12,10,12,12,12,135,
-        9,12,1,13,1,13,1,13,1,13,1,13,1,13,1,13,5,13,144,8,13,10,13,12,13,
-        147,9,13,3,13,149,8,13,1,13,1,13,1,13,0,1,24,14,0,2,4,6,8,10,12,
-        14,16,18,20,22,24,26,0,5,1,0,1,19,1,0,20,37,1,0,55,56,1,0,58,63,
-        1,0,64,68,159,0,33,1,0,0,0,2,38,1,0,0,0,4,48,1,0,0,0,6,50,1,0,0,
-        0,8,58,1,0,0,0,10,69,1,0,0,0,12,71,1,0,0,0,14,87,1,0,0,0,16,89,1,
-        0,0,0,18,94,1,0,0,0,20,98,1,0,0,0,22,106,1,0,0,0,24,120,1,0,0,0,
-        26,136,1,0,0,0,28,32,3,2,1,0,29,32,3,6,3,0,30,32,3,20,10,0,31,28,
-        1,0,0,0,31,29,1,0,0,0,31,30,1,0,0,0,32,35,1,0,0,0,33,31,1,0,0,0,
-        33,34,1,0,0,0,34,36,1,0,0,0,35,33,1,0,0,0,36,37,5,0,0,1,37,1,1,0,
-        0,0,38,39,5,38,0,0,39,40,5,72,0,0,40,41,5,54,0,0,41,44,3,4,2,0,42,
-        43,5,42,0,0,43,45,5,69,0,0,44,42,1,0,0,0,44,45,1,0,0,0,45,46,1,0,
-        0,0,46,47,5,48,0,0,47,3,1,0,0,0,48,49,7,0,0,0,49,5,1,0,0,0,50,51,
-        5,39,0,0,51,52,5,72,0,0,52,54,5,52,0,0,53,55,3,8,4,0,54,53,1,0,0,
-        0,54,55,1,0,0,0,55,56,1,0,0,0,56,57,5,53,0,0,57,7,1,0,0,0,58,63,
-        3,10,5,0,59,60,5,49,0,0,60,62,3,10,5,0,61,59,1,0,0,0,62,65,1,0,0,
-        0,63,61,1,0,0,0,63,64,1,0,0,0,64,9,1,0,0,0,65,63,1,0,0,0,66,70,3,
-        12,6,0,67,70,3,16,8,0,68,70,3,18,9,0,69,66,1,0,0,0,69,67,1,0,0,0,
-        69,68,1,0,0,0,70,11,1,0,0,0,71,72,5,72,0,0,72,73,5,47,0,0,73,74,
-        3,14,7,0,74,83,5,50,0,0,75,80,3,24,12,0,76,77,5,49,0,0,77,79,3,24,
-        12,0,78,76,1,0,0,0,79,82,1,0,0,0,80,78,1,0,0,0,80,81,1,0,0,0,81,
-        84,1,0,0,0,82,80,1,0,0,0,83,75,1,0,0,0,83,84,1,0,0,0,84,85,1,0,0,
-        0,85,86,5,51,0,0,86,13,1,0,0,0,87,88,7,1,0,0,88,15,1,0,0,0,89,90,
-        5,44,0,0,90,91,5,50,0,0,91,92,5,69,0,0,92,93,5,51,0,0,93,17,1,0,
-        0,0,94,95,5,72,0,0,95,96,5,45,0,0,96,97,3,24,12,0,97,19,1,0,0,0,
-        98,99,5,40,0,0,99,100,5,72,0,0,100,101,5,46,0,0,101,102,5,72,0,0,
-        102,103,5,41,0,0,103,104,3,22,11,0,104,105,5,48,0,0,105,21,1,0,0,
-        0,106,107,3,24,12,0,107,23,1,0,0,0,108,109,6,12,-1,0,109,110,5,57,
-        0,0,110,121,3,24,12,7,111,112,5,50,0,0,112,113,3,24,12,0,113,114,
-        5,51,0,0,114,121,1,0,0,0,115,121,3,26,13,0,116,121,5,69,0,0,117,
-        121,5,70,0,0,118,121,5,72,0,0,119,121,5,71,0,0,120,108,1,0,0,0,120,
-        111,1,0,0,0,120,115,1,0,0,0,120,116,1,0,0,0,120,117,1,0,0,0,120,
-        118,1,0,0,0,120,119,1,0,0,0,121,133,1,0,0,0,122,123,10,10,0,0,123,
-        124,7,2,0,0,124,132,3,24,12,11,125,126,10,9,0,0,126,127,7,3,0,0,
-        127,132,3,24,12,10,128,129,10,8,0,0,129,130,7,4,0,0,130,132,3,24,
-        12,9,131,122,1,0,0,0,131,125,1,0,0,0,131,128,1,0,0,0,132,135,1,0,
-        0,0,133,131,1,0,0,0,133,134,1,0,0,0,134,25,1,0,0,0,135,133,1,0,0,
-        0,136,137,5,72,0,0,137,138,5,47,0,0,138,139,3,14,7,0,139,148,5,50,
-        0,0,140,145,3,24,12,0,141,142,5,49,0,0,142,144,3,24,12,0,143,141,
-        1,0,0,0,144,147,1,0,0,0,145,143,1,0,0,0,145,146,1,0,0,0,146,149,
-        1,0,0,0,147,145,1,0,0,0,148,140,1,0,0,0,148,149,1,0,0,0,149,150,
-        1,0,0,0,150,151,5,51,0,0,151,27,1,0,0,0,13,31,33,44,54,63,69,80,
-        83,120,131,133,145,148
+        2,14,7,14,2,15,7,15,1,0,1,0,1,0,5,0,36,8,0,10,0,12,0,39,9,0,1,0,
+        1,0,1,1,1,1,1,1,1,1,1,1,1,1,3,1,49,8,1,1,1,1,1,1,2,1,2,1,3,1,3,1,
+        4,1,4,1,5,1,5,1,5,1,5,3,5,63,8,5,1,5,1,5,1,6,1,6,1,6,5,6,70,8,6,
+        10,6,12,6,73,9,6,1,7,1,7,1,7,3,7,78,8,7,1,8,1,8,1,8,1,8,1,8,1,8,
+        1,8,5,8,87,8,8,10,8,12,8,90,9,8,3,8,92,8,8,1,8,1,8,1,9,1,9,1,10,
+        1,10,1,10,1,10,1,10,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,1,12,
+        1,12,1,12,1,12,1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,
+        1,14,1,14,1,14,1,14,3,14,129,8,14,1,14,1,14,1,14,1,14,1,14,1,14,
+        1,14,1,14,1,14,5,14,140,8,14,10,14,12,14,143,9,14,1,15,1,15,1,15,
+        1,15,1,15,1,15,1,15,5,15,152,8,15,10,15,12,15,155,9,15,3,15,157,
+        8,15,1,15,1,15,1,15,0,1,28,16,0,2,4,6,8,10,12,14,16,18,20,22,24,
+        26,28,30,0,5,1,0,1,19,1,0,20,37,1,0,55,56,1,0,58,63,1,0,64,68,165,
+        0,37,1,0,0,0,2,42,1,0,0,0,4,52,1,0,0,0,6,54,1,0,0,0,8,56,1,0,0,0,
+        10,58,1,0,0,0,12,66,1,0,0,0,14,77,1,0,0,0,16,79,1,0,0,0,18,95,1,
+        0,0,0,20,97,1,0,0,0,22,102,1,0,0,0,24,106,1,0,0,0,26,114,1,0,0,0,
+        28,128,1,0,0,0,30,144,1,0,0,0,32,36,3,2,1,0,33,36,3,10,5,0,34,36,
+        3,24,12,0,35,32,1,0,0,0,35,33,1,0,0,0,35,34,1,0,0,0,36,39,1,0,0,
+        0,37,35,1,0,0,0,37,38,1,0,0,0,38,40,1,0,0,0,39,37,1,0,0,0,40,41,
+        5,0,0,1,41,1,1,0,0,0,42,43,5,38,0,0,43,44,3,4,2,0,44,45,5,54,0,0,
+        45,48,3,8,4,0,46,47,5,42,0,0,47,49,3,6,3,0,48,46,1,0,0,0,48,49,1,
+        0,0,0,49,50,1,0,0,0,50,51,5,48,0,0,51,3,1,0,0,0,52,53,5,72,0,0,53,
+        5,1,0,0,0,54,55,5,69,0,0,55,7,1,0,0,0,56,57,7,0,0,0,57,9,1,0,0,0,
+        58,59,5,39,0,0,59,60,5,72,0,0,60,62,5,52,0,0,61,63,3,12,6,0,62,61,
+        1,0,0,0,62,63,1,0,0,0,63,64,1,0,0,0,64,65,5,53,0,0,65,11,1,0,0,0,
+        66,71,3,14,7,0,67,68,5,49,0,0,68,70,3,14,7,0,69,67,1,0,0,0,70,73,
+        1,0,0,0,71,69,1,0,0,0,71,72,1,0,0,0,72,13,1,0,0,0,73,71,1,0,0,0,
+        74,78,3,16,8,0,75,78,3,20,10,0,76,78,3,22,11,0,77,74,1,0,0,0,77,
+        75,1,0,0,0,77,76,1,0,0,0,78,15,1,0,0,0,79,80,5,72,0,0,80,81,5,47,
+        0,0,81,82,3,18,9,0,82,91,5,50,0,0,83,88,3,28,14,0,84,85,5,49,0,0,
+        85,87,3,28,14,0,86,84,1,0,0,0,87,90,1,0,0,0,88,86,1,0,0,0,88,89,
+        1,0,0,0,89,92,1,0,0,0,90,88,1,0,0,0,91,83,1,0,0,0,91,92,1,0,0,0,
+        92,93,1,0,0,0,93,94,5,51,0,0,94,17,1,0,0,0,95,96,7,1,0,0,96,19,1,
+        0,0,0,97,98,5,44,0,0,98,99,5,50,0,0,99,100,5,69,0,0,100,101,5,51,
+        0,0,101,21,1,0,0,0,102,103,5,72,0,0,103,104,5,45,0,0,104,105,3,28,
+        14,0,105,23,1,0,0,0,106,107,5,40,0,0,107,108,5,72,0,0,108,109,5,
+        46,0,0,109,110,5,72,0,0,110,111,5,41,0,0,111,112,3,26,13,0,112,113,
+        5,48,0,0,113,25,1,0,0,0,114,115,3,28,14,0,115,27,1,0,0,0,116,117,
+        6,14,-1,0,117,118,5,57,0,0,118,129,3,28,14,7,119,120,5,50,0,0,120,
+        121,3,28,14,0,121,122,5,51,0,0,122,129,1,0,0,0,123,129,3,30,15,0,
+        124,129,5,69,0,0,125,129,5,70,0,0,126,129,5,72,0,0,127,129,5,71,
+        0,0,128,116,1,0,0,0,128,119,1,0,0,0,128,123,1,0,0,0,128,124,1,0,
+        0,0,128,125,1,0,0,0,128,126,1,0,0,0,128,127,1,0,0,0,129,141,1,0,
+        0,0,130,131,10,10,0,0,131,132,7,2,0,0,132,140,3,28,14,11,133,134,
+        10,9,0,0,134,135,7,3,0,0,135,140,3,28,14,10,136,137,10,8,0,0,137,
+        138,7,4,0,0,138,140,3,28,14,9,139,130,1,0,0,0,139,133,1,0,0,0,139,
+        136,1,0,0,0,140,143,1,0,0,0,141,139,1,0,0,0,141,142,1,0,0,0,142,
+        29,1,0,0,0,143,141,1,0,0,0,144,145,5,72,0,0,145,146,5,47,0,0,146,
+        147,3,18,9,0,147,156,5,50,0,0,148,153,3,28,14,0,149,150,5,49,0,0,
+        150,152,3,28,14,0,151,149,1,0,0,0,152,155,1,0,0,0,153,151,1,0,0,
+        0,153,154,1,0,0,0,154,157,1,0,0,0,155,153,1,0,0,0,156,148,1,0,0,
+        0,156,157,1,0,0,0,157,158,1,0,0,0,158,159,5,51,0,0,159,31,1,0,0,
+        0,13,35,37,48,62,71,77,88,91,128,139,141,153,156
     ]
 
 class SmartHomeStateMachineParser ( Parser ):
@@ -109,23 +111,25 @@ class SmartHomeStateMachineParser ( Parser ):
 
     RULE_program = 0
     RULE_deviceDeclaration = 1
-    RULE_deviceType = 2
-    RULE_stateDeclaration = 3
-    RULE_actionList = 4
-    RULE_action = 5
-    RULE_deviceAction = 6
-    RULE_deviceMethod = 7
-    RULE_delayAction = 8
-    RULE_variableAssignment = 9
-    RULE_transitionDeclaration = 10
-    RULE_condition = 11
-    RULE_expression = 12
-    RULE_deviceCall = 13
+    RULE_deviceName = 2
+    RULE_pinDeclaration = 3
+    RULE_deviceType = 4
+    RULE_stateDeclaration = 5
+    RULE_actionList = 6
+    RULE_action = 7
+    RULE_deviceAction = 8
+    RULE_deviceMethod = 9
+    RULE_delayAction = 10
+    RULE_variableAssignment = 11
+    RULE_transitionDeclaration = 12
+    RULE_condition = 13
+    RULE_expression = 14
+    RULE_deviceCall = 15
 
-    ruleNames =  [ "program", "deviceDeclaration", "deviceType", "stateDeclaration", 
-                   "actionList", "action", "deviceAction", "deviceMethod", 
-                   "delayAction", "variableAssignment", "transitionDeclaration", 
-                   "condition", "expression", "deviceCall" ]
+    ruleNames =  [ "program", "deviceDeclaration", "deviceName", "pinDeclaration", 
+                   "deviceType", "stateDeclaration", "actionList", "action", 
+                   "deviceAction", "deviceMethod", "delayAction", "variableAssignment", 
+                   "transitionDeclaration", "condition", "expression", "deviceCall" ]
 
     EOF = Token.EOF
     T__0=1
@@ -271,33 +275,33 @@ class SmartHomeStateMachineParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 33
+            self.state = 37
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & 1924145348608) != 0):
-                self.state = 31
+                self.state = 35
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [38]:
-                    self.state = 28
+                    self.state = 32
                     self.deviceDeclaration()
                     pass
                 elif token in [39]:
-                    self.state = 29
+                    self.state = 33
                     self.stateDeclaration()
                     pass
                 elif token in [40]:
-                    self.state = 30
+                    self.state = 34
                     self.transitionDeclaration()
                     pass
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 35
+                self.state = 39
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 36
+            self.state = 40
             self.match(SmartHomeStateMachineParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -318,8 +322,9 @@ class SmartHomeStateMachineParser ( Parser ):
         def DEVICE(self):
             return self.getToken(SmartHomeStateMachineParser.DEVICE, 0)
 
-        def IDENTIFIER(self):
-            return self.getToken(SmartHomeStateMachineParser.IDENTIFIER, 0)
+        def deviceName(self):
+            return self.getTypedRuleContext(SmartHomeStateMachineParser.DeviceNameContext,0)
+
 
         def COLON(self):
             return self.getToken(SmartHomeStateMachineParser.COLON, 0)
@@ -334,8 +339,9 @@ class SmartHomeStateMachineParser ( Parser ):
         def PIN(self):
             return self.getToken(SmartHomeStateMachineParser.PIN, 0)
 
-        def NUMBER(self):
-            return self.getToken(SmartHomeStateMachineParser.NUMBER, 0)
+        def pinDeclaration(self):
+            return self.getTypedRuleContext(SmartHomeStateMachineParser.PinDeclarationContext,0)
+
 
         def getRuleIndex(self):
             return SmartHomeStateMachineParser.RULE_deviceDeclaration
@@ -364,26 +370,120 @@ class SmartHomeStateMachineParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 38
+            self.state = 42
             self.match(SmartHomeStateMachineParser.DEVICE)
-            self.state = 39
-            self.match(SmartHomeStateMachineParser.IDENTIFIER)
-            self.state = 40
-            self.match(SmartHomeStateMachineParser.COLON)
-            self.state = 41
-            self.deviceType()
+            self.state = 43
+            self.deviceName()
             self.state = 44
+            self.match(SmartHomeStateMachineParser.COLON)
+            self.state = 45
+            self.deviceType()
+            self.state = 48
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==42:
-                self.state = 42
+                self.state = 46
                 self.match(SmartHomeStateMachineParser.PIN)
-                self.state = 43
-                self.match(SmartHomeStateMachineParser.NUMBER)
+                self.state = 47
+                self.pinDeclaration()
 
 
-            self.state = 46
+            self.state = 50
             self.match(SmartHomeStateMachineParser.SEMICOLON)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class DeviceNameContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def IDENTIFIER(self):
+            return self.getToken(SmartHomeStateMachineParser.IDENTIFIER, 0)
+
+        def getRuleIndex(self):
+            return SmartHomeStateMachineParser.RULE_deviceName
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDeviceName" ):
+                listener.enterDeviceName(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDeviceName" ):
+                listener.exitDeviceName(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDeviceName" ):
+                return visitor.visitDeviceName(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def deviceName(self):
+
+        localctx = SmartHomeStateMachineParser.DeviceNameContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 4, self.RULE_deviceName)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 52
+            self.match(SmartHomeStateMachineParser.IDENTIFIER)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class PinDeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def NUMBER(self):
+            return self.getToken(SmartHomeStateMachineParser.NUMBER, 0)
+
+        def getRuleIndex(self):
+            return SmartHomeStateMachineParser.RULE_pinDeclaration
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPinDeclaration" ):
+                listener.enterPinDeclaration(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPinDeclaration" ):
+                listener.exitPinDeclaration(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPinDeclaration" ):
+                return visitor.visitPinDeclaration(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def pinDeclaration(self):
+
+        localctx = SmartHomeStateMachineParser.PinDeclarationContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 6, self.RULE_pinDeclaration)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 54
+            self.match(SmartHomeStateMachineParser.NUMBER)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -424,11 +524,11 @@ class SmartHomeStateMachineParser ( Parser ):
     def deviceType(self):
 
         localctx = SmartHomeStateMachineParser.DeviceTypeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_deviceType)
+        self.enterRule(localctx, 8, self.RULE_deviceType)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 48
+            self.state = 56
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1048574) != 0)):
                 self._errHandler.recoverInline(self)
@@ -490,25 +590,25 @@ class SmartHomeStateMachineParser ( Parser ):
     def stateDeclaration(self):
 
         localctx = SmartHomeStateMachineParser.StateDeclarationContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 6, self.RULE_stateDeclaration)
+        self.enterRule(localctx, 10, self.RULE_stateDeclaration)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 50
+            self.state = 58
             self.match(SmartHomeStateMachineParser.STATE)
-            self.state = 51
+            self.state = 59
             self.match(SmartHomeStateMachineParser.IDENTIFIER)
-            self.state = 52
+            self.state = 60
             self.match(SmartHomeStateMachineParser.LBRACE)
-            self.state = 54
+            self.state = 62
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==44 or _la==72:
-                self.state = 53
+                self.state = 61
                 self.actionList()
 
 
-            self.state = 56
+            self.state = 64
             self.match(SmartHomeStateMachineParser.RBRACE)
         except RecognitionException as re:
             localctx.exception = re
@@ -562,21 +662,21 @@ class SmartHomeStateMachineParser ( Parser ):
     def actionList(self):
 
         localctx = SmartHomeStateMachineParser.ActionListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_actionList)
+        self.enterRule(localctx, 12, self.RULE_actionList)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 58
+            self.state = 66
             self.action()
-            self.state = 63
+            self.state = 71
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==49:
-                self.state = 59
+                self.state = 67
                 self.match(SmartHomeStateMachineParser.COMMA)
-                self.state = 60
+                self.state = 68
                 self.action()
-                self.state = 65
+                self.state = 73
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -631,26 +731,26 @@ class SmartHomeStateMachineParser ( Parser ):
     def action(self):
 
         localctx = SmartHomeStateMachineParser.ActionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_action)
+        self.enterRule(localctx, 14, self.RULE_action)
         try:
-            self.state = 69
+            self.state = 77
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 66
+                self.state = 74
                 self.deviceAction()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 67
+                self.state = 75
                 self.delayAction()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 68
+                self.state = 76
                 self.variableAssignment()
                 pass
 
@@ -723,39 +823,39 @@ class SmartHomeStateMachineParser ( Parser ):
     def deviceAction(self):
 
         localctx = SmartHomeStateMachineParser.DeviceActionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_deviceAction)
+        self.enterRule(localctx, 16, self.RULE_deviceAction)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 71
+            self.state = 79
             self.match(SmartHomeStateMachineParser.IDENTIFIER)
-            self.state = 72
+            self.state = 80
             self.match(SmartHomeStateMachineParser.DOT)
-            self.state = 73
+            self.state = 81
             self.deviceMethod()
-            self.state = 74
+            self.state = 82
             self.match(SmartHomeStateMachineParser.LPAREN)
-            self.state = 83
+            self.state = 91
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 50)) & ~0x3f) == 0 and ((1 << (_la - 50)) & 7864449) != 0):
-                self.state = 75
+                self.state = 83
                 self.expression(0)
-                self.state = 80
+                self.state = 88
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==49:
-                    self.state = 76
+                    self.state = 84
                     self.match(SmartHomeStateMachineParser.COMMA)
-                    self.state = 77
+                    self.state = 85
                     self.expression(0)
-                    self.state = 82
+                    self.state = 90
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
 
 
-            self.state = 85
+            self.state = 93
             self.match(SmartHomeStateMachineParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -797,11 +897,11 @@ class SmartHomeStateMachineParser ( Parser ):
     def deviceMethod(self):
 
         localctx = SmartHomeStateMachineParser.DeviceMethodContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_deviceMethod)
+        self.enterRule(localctx, 18, self.RULE_deviceMethod)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 87
+            self.state = 95
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 274876858368) != 0)):
                 self._errHandler.recoverInline(self)
@@ -859,16 +959,16 @@ class SmartHomeStateMachineParser ( Parser ):
     def delayAction(self):
 
         localctx = SmartHomeStateMachineParser.DelayActionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_delayAction)
+        self.enterRule(localctx, 20, self.RULE_delayAction)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 89
+            self.state = 97
             self.match(SmartHomeStateMachineParser.DELAY)
-            self.state = 90
+            self.state = 98
             self.match(SmartHomeStateMachineParser.LPAREN)
-            self.state = 91
+            self.state = 99
             self.match(SmartHomeStateMachineParser.NUMBER)
-            self.state = 92
+            self.state = 100
             self.match(SmartHomeStateMachineParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -919,14 +1019,14 @@ class SmartHomeStateMachineParser ( Parser ):
     def variableAssignment(self):
 
         localctx = SmartHomeStateMachineParser.VariableAssignmentContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_variableAssignment)
+        self.enterRule(localctx, 22, self.RULE_variableAssignment)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 94
+            self.state = 102
             self.match(SmartHomeStateMachineParser.IDENTIFIER)
-            self.state = 95
+            self.state = 103
             self.match(SmartHomeStateMachineParser.ASSIGN)
-            self.state = 96
+            self.state = 104
             self.expression(0)
         except RecognitionException as re:
             localctx.exception = re
@@ -989,22 +1089,22 @@ class SmartHomeStateMachineParser ( Parser ):
     def transitionDeclaration(self):
 
         localctx = SmartHomeStateMachineParser.TransitionDeclarationContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_transitionDeclaration)
+        self.enterRule(localctx, 24, self.RULE_transitionDeclaration)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 98
+            self.state = 106
             self.match(SmartHomeStateMachineParser.TRANSITION)
-            self.state = 99
+            self.state = 107
             self.match(SmartHomeStateMachineParser.IDENTIFIER)
-            self.state = 100
+            self.state = 108
             self.match(SmartHomeStateMachineParser.ARROW)
-            self.state = 101
+            self.state = 109
             self.match(SmartHomeStateMachineParser.IDENTIFIER)
-            self.state = 102
+            self.state = 110
             self.match(SmartHomeStateMachineParser.WHEN)
-            self.state = 103
+            self.state = 111
             self.condition()
-            self.state = 104
+            self.state = 112
             self.match(SmartHomeStateMachineParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1049,10 +1149,10 @@ class SmartHomeStateMachineParser ( Parser ):
     def condition(self):
 
         localctx = SmartHomeStateMachineParser.ConditionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_condition)
+        self.enterRule(localctx, 26, self.RULE_condition)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 106
+            self.state = 114
             self.expression(0)
         except RecognitionException as re:
             localctx.exception = re
@@ -1165,58 +1265,58 @@ class SmartHomeStateMachineParser ( Parser ):
         _parentState = self.state
         localctx = SmartHomeStateMachineParser.ExpressionContext(self, self._ctx, _parentState)
         _prevctx = localctx
-        _startState = 24
-        self.enterRecursionRule(localctx, 24, self.RULE_expression, _p)
+        _startState = 28
+        self.enterRecursionRule(localctx, 28, self.RULE_expression, _p)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 120
+            self.state = 128
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
             if la_ == 1:
-                self.state = 109
+                self.state = 117
                 self.match(SmartHomeStateMachineParser.NOT)
-                self.state = 110
+                self.state = 118
                 self.expression(7)
                 pass
 
             elif la_ == 2:
-                self.state = 111
+                self.state = 119
                 self.match(SmartHomeStateMachineParser.LPAREN)
-                self.state = 112
+                self.state = 120
                 self.expression(0)
-                self.state = 113
+                self.state = 121
                 self.match(SmartHomeStateMachineParser.RPAREN)
                 pass
 
             elif la_ == 3:
-                self.state = 115
+                self.state = 123
                 self.deviceCall()
                 pass
 
             elif la_ == 4:
-                self.state = 116
+                self.state = 124
                 self.match(SmartHomeStateMachineParser.NUMBER)
                 pass
 
             elif la_ == 5:
-                self.state = 117
+                self.state = 125
                 self.match(SmartHomeStateMachineParser.STRING)
                 pass
 
             elif la_ == 6:
-                self.state = 118
+                self.state = 126
                 self.match(SmartHomeStateMachineParser.IDENTIFIER)
                 pass
 
             elif la_ == 7:
-                self.state = 119
+                self.state = 127
                 self.match(SmartHomeStateMachineParser.BOOLEAN)
                 pass
 
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 133
+            self.state = 141
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1224,65 +1324,65 @@ class SmartHomeStateMachineParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 131
+                    self.state = 139
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
                     if la_ == 1:
                         localctx = SmartHomeStateMachineParser.ExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 122
+                        self.state = 130
                         if not self.precpred(self._ctx, 10):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 10)")
-                        self.state = 123
+                        self.state = 131
                         _la = self._input.LA(1)
                         if not(_la==55 or _la==56):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 124
+                        self.state = 132
                         self.expression(11)
                         pass
 
                     elif la_ == 2:
                         localctx = SmartHomeStateMachineParser.ExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 125
+                        self.state = 133
                         if not self.precpred(self._ctx, 9):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
-                        self.state = 126
+                        self.state = 134
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & -288230376151711744) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 127
+                        self.state = 135
                         self.expression(10)
                         pass
 
                     elif la_ == 3:
                         localctx = SmartHomeStateMachineParser.ExpressionContext(self, _parentctx, _parentState)
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 128
+                        self.state = 136
                         if not self.precpred(self._ctx, 8):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
-                        self.state = 129
+                        self.state = 137
                         _la = self._input.LA(1)
                         if not(((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & 31) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 130
+                        self.state = 138
                         self.expression(9)
                         pass
 
              
-                self.state = 135
+                self.state = 143
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
 
@@ -1354,39 +1454,39 @@ class SmartHomeStateMachineParser ( Parser ):
     def deviceCall(self):
 
         localctx = SmartHomeStateMachineParser.DeviceCallContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_deviceCall)
+        self.enterRule(localctx, 30, self.RULE_deviceCall)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 136
+            self.state = 144
             self.match(SmartHomeStateMachineParser.IDENTIFIER)
-            self.state = 137
+            self.state = 145
             self.match(SmartHomeStateMachineParser.DOT)
-            self.state = 138
+            self.state = 146
             self.deviceMethod()
-            self.state = 139
+            self.state = 147
             self.match(SmartHomeStateMachineParser.LPAREN)
-            self.state = 148
+            self.state = 156
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 50)) & ~0x3f) == 0 and ((1 << (_la - 50)) & 7864449) != 0):
-                self.state = 140
+                self.state = 148
                 self.expression(0)
-                self.state = 145
+                self.state = 153
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==49:
-                    self.state = 141
+                    self.state = 149
                     self.match(SmartHomeStateMachineParser.COMMA)
-                    self.state = 142
+                    self.state = 150
                     self.expression(0)
-                    self.state = 147
+                    self.state = 155
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
 
 
-            self.state = 150
+            self.state = 158
             self.match(SmartHomeStateMachineParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -1401,7 +1501,7 @@ class SmartHomeStateMachineParser ( Parser ):
     def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates == None:
             self._predicates = dict()
-        self._predicates[12] = self.expression_sempred
+        self._predicates[14] = self.expression_sempred
         pred = self._predicates.get(ruleIndex, None)
         if pred is None:
             raise Exception("No predicate with index:" + str(ruleIndex))

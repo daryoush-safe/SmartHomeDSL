@@ -1,4 +1,4 @@
-# Generated from C:/compiler_project/SmartHomeStateMachine.g4 by ANTLR 4.13.2
+# Generated from C:/University/compiler/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .SmartHomeStateMachineParser import SmartHomeStateMachineParser
@@ -16,6 +16,16 @@ class SmartHomeStateMachineVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by SmartHomeStateMachineParser#deviceDeclaration.
     def visitDeviceDeclaration(self, ctx:SmartHomeStateMachineParser.DeviceDeclarationContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#deviceName.
+    def visitDeviceName(self, ctx:SmartHomeStateMachineParser.DeviceNameContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by SmartHomeStateMachineParser#pinDeclaration.
+    def visitPinDeclaration(self, ctx:SmartHomeStateMachineParser.PinDeclarationContext):
         return self.visitChildren(ctx)
 
 

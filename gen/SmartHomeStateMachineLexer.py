@@ -1,4 +1,4 @@
-# Generated from C:/compiler_project/SmartHomeStateMachine.g4 by ANTLR 4.13.2
+# Generated from C:/University/compiler/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
 from antlr4 import *
 from io import StringIO
 import sys

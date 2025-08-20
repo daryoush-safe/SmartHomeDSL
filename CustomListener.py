@@ -15,7 +15,7 @@ class CustomListener(SmartHomeStateMachineListener):
 
         # Rules with binary operators (handled specially in AST)
         self.binary_operator_list = [
-            'expression'
+            'expression',
         ]
 
         # Rules that create a new scope or block
@@ -28,7 +28,6 @@ class CustomListener(SmartHomeStateMachineListener):
 
         self.rule_names = []
         self.ast = AST()
-
 
     def exitEveryRule(self, ctx):
         rule_name = self.rule_names[ctx.getRuleIndex()]
@@ -45,7 +44,6 @@ class CustomListener(SmartHomeStateMachineListener):
 
     def exitDeviceDeclaration(self, ctx:SmartHomeStateMachineParser.DeviceDeclarationContext):
         make_ast_subtree(self.ast, ctx, "device_dec", keep_node=True)
-
 
     def exitStateDeclaration(self, ctx:SmartHomeStateMachineParser.StateDeclarationContext):
         make_ast_subtree(self.ast, ctx, "state_dec", keep_node=True)
