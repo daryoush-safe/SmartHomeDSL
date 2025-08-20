@@ -7,7 +7,15 @@ program
 
 // Device Declarations
 deviceDeclaration
-    : 'device' IDENTIFIER ':' deviceType ('pin' NUMBER)?';'
+    : 'device' deviceName ':' deviceType ('pin' pinDeclaration)?';'
+    ;
+
+deviceName
+    : IDENTIFIER
+    ;
+
+pinDeclaration
+    : NUMBER
     ;
 
 deviceType
@@ -30,15 +38,17 @@ deviceType
     | 'DIGITAL_OUTPUT'
     | 'ANALOG_INPUT'
     | 'ANALOG_OUTPUT'
+    | 'POTENTIOMETER'
+    | 'DISPLAY'
     ;
 
 // State Declarations
 stateDeclaration
-    : 'state' IDENTIFIER '{' actionList? '}'
+    : 'state' stateName '{' (action (',' action)*)? '}'
     ;
 
-actionList
-    : action (',' action)*
+stateName
+    : IDENTIFIER
     ;
 
 action
@@ -47,42 +57,41 @@ action
     | variableAssignment
     ;
 
-deviceAction
-    : IDENTIFIER '.' deviceMethod '(' (expression (',' expression)*)? ')'
-    ;
+deviceAction : deviceName '.' actionMethod '(' (expression (',' expression)*)? ')'
+             | deviceName '.' getterMethod '(' ')'
+             ;
 
-deviceMethod
-    : 'on'
-    | 'off'
-    | 'toggle'
-    | 'set'
-    | 'read'
-    | 'write'
-    | 'move'
-    | 'display'
-    | 'beep'
-    | 'fade'
-    | 'blink'
-    | 'setColor'
-    | 'setBrightness'
-    | 'getDistance'
-    | 'getTemperature'
-    | 'getHumidity'
-    | 'isPressed'
-    | 'isMotionDetected'
-    ;
+actionMethod : 'on' | 'off' | 'toggle' | 'set' | 'write' | 'move' | 'display'
+             | 'beep' | 'fade' | 'blink' | 'setColor' | 'setBrightness'
+             ;
+
+getterMethod : 'read' | 'getDistance' | 'getTemperature' | 'getHumidity'
+             | 'isPressed' | 'isMotionDetected'
+             ;
 
 delayAction
-    : 'delay' '(' NUMBER ')'
+    : 'delay' '(' delayParameter ')'
+    ;
+
+delayParameter
+    : NUMBER
     ;
 
 variableAssignment
-    : IDENTIFIER '=' expression
+    : variableName '=' expression
+    ;
+
+variableName
+    : IDENTIFIER
     ;
 
 // Transition Declarations
 transitionDeclaration
-    : 'transition' IDENTIFIER '->' IDENTIFIER 'when' condition ';'
+    : 'transition' (stateName | allStates) '->' stateName 'when' condition ';'
+    ;
+
+allStates
+    : '*'
     ;
 
 condition
@@ -90,20 +99,42 @@ condition
     ;
 
 expression
-    : expression ('&&' | '||') expression
-    | expression ('==' | '!=' | '<' | '>' | '<=' | '>=') expression
-    | expression ('+' | '-' | '*' | '/' | '%') expression
-    | '!' expression
+    : expression '||' andExpression
+    | andExpression
+    ;
+
+andExpression
+    : andExpression '&&' comparisonExpression
+    | comparisonExpression
+    ;
+
+comparisonExpression
+    : comparisonExpression ('==' | '!=' | '<' | '>' | '<=' | '>=') arithmeticExpression
+    | arithmeticExpression
+    ;
+
+arithmeticExpression
+    : arithmeticExpression ('+' | '-') term
+    | term
+    ;
+
+term
+    : term ('*' | '/' | '%') factor
+    | factor
+    ;
+
+factor
+    : '!' factor
     | '(' expression ')'
     | deviceCall
+    | IDENTIFIER
     | NUMBER
     | STRING
-    | IDENTIFIER
     | BOOLEAN
     ;
 
 deviceCall
-    : IDENTIFIER '.' deviceMethod '(' (expression (',' expression)*)? ')'
+    : deviceName '.' getterMethod '(' (expression (',' expression)*)? ')'
     ;
 
 // Lexer Rules

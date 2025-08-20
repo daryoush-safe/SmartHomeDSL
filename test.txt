@@ -18,5 +18,7 @@ state comfortable {
 }
 
 transition idle -> alert when doorSensor.isMotionDetected();
+transition * -> alert when doorSensor.isMotionDetected();
 transition alert -> idle when !doorSensor.isMotionDetected();
 transition idle -> comfortable when tempSensor.getTemperature() > 20 && tempSensor.getTemperature() < 25;
+transition idle -> comfortable when tempSensor.getTemperature() >= 20 || tempSensor.getTemperature() < tempSensor.getTemperature();

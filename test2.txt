@@ -1,0 +1,47 @@
+device mainLED : LED pin 13;
+device doorSensor : MOTION_SENSOR pin 2;
+device tempSensor : TEMPERATURE_SENSOR pin 4;
+device buzzer : BUZZER pin 8;
+device displayScreen : DISPLAY pin 7;
+device brightnessKnob : POTENTIOMETER pin 1;
+device emergencyButton : BUTTON pin 3;
+device statusLED : RGB_LED pin 9;
+
+state idle {
+    mainLED.off(),
+    statusLED.setColor("blue"),
+    displayScreen.display("System Ready"),
+    brightness = brightnessKnob.read() + 121,
+    statusLED.setBrightness(brightness)
+}
+
+state alert {
+    mainLED.blink(500),
+    buzzer.beep(1000),
+    statusLED.setColor("red"),
+    statusLED.setBrightness(255),
+    displayScreen.display("MOTION DETECTED!"),
+    delay(2000)
+}
+
+state comfortable {
+    mainLED.on(),
+    statusLED.setColor("green"),
+    statusLED.fade(200),
+    temp = tempSensor.getTemperature(),
+    displayScreen.display(tempSensor.getTemperature()),
+    displayScreen.display("Temp: " + temp + "C")
+}
+
+state emergency {
+    mainLED.blink(100),
+    buzzer.beep(200),
+    statusLED.setColor("red"),
+    statusLED.blink(100),
+    displayScreen.display("EMERGENCY!")
+}
+
+transition idle -> alert when doorSensor.isMotionDetected();
+transition alert -> idle when !doorSensor.isMotionDetected() && !emergencyButton.isPressed();
+transition idle -> comfortable when tempSensor.getTemperature() > 20 && tempSensor.getTemperature() < 25;
+transition comfortable -> idle when tempSensor.getTemperature() <= 20 || tempSensor.getTemperature() >= 25;

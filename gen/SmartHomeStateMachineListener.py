@@ -1,4 +1,4 @@
-# Generated from C:/compiler_project/SmartHomeStateMachine.g4 by ANTLR 4.13.2
+# Generated from C:/University/compiler/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .SmartHomeStateMachineParser import SmartHomeStateMachineParser
@@ -26,6 +26,24 @@ class SmartHomeStateMachineListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SmartHomeStateMachineParser#deviceName.
+    def enterDeviceName(self, ctx:SmartHomeStateMachineParser.DeviceNameContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#deviceName.
+    def exitDeviceName(self, ctx:SmartHomeStateMachineParser.DeviceNameContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#pinDeclaration.
+    def enterPinDeclaration(self, ctx:SmartHomeStateMachineParser.PinDeclarationContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#pinDeclaration.
+    def exitPinDeclaration(self, ctx:SmartHomeStateMachineParser.PinDeclarationContext):
+        pass
+
+
     # Enter a parse tree produced by SmartHomeStateMachineParser#deviceType.
     def enterDeviceType(self, ctx:SmartHomeStateMachineParser.DeviceTypeContext):
         pass
@@ -44,12 +62,12 @@ class SmartHomeStateMachineListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SmartHomeStateMachineParser#actionList.
-    def enterActionList(self, ctx:SmartHomeStateMachineParser.ActionListContext):
+    # Enter a parse tree produced by SmartHomeStateMachineParser#stateName.
+    def enterStateName(self, ctx:SmartHomeStateMachineParser.StateNameContext):
         pass
 
-    # Exit a parse tree produced by SmartHomeStateMachineParser#actionList.
-    def exitActionList(self, ctx:SmartHomeStateMachineParser.ActionListContext):
+    # Exit a parse tree produced by SmartHomeStateMachineParser#stateName.
+    def exitStateName(self, ctx:SmartHomeStateMachineParser.StateNameContext):
         pass
 
 
@@ -71,12 +89,21 @@ class SmartHomeStateMachineListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by SmartHomeStateMachineParser#deviceMethod.
-    def enterDeviceMethod(self, ctx:SmartHomeStateMachineParser.DeviceMethodContext):
+    # Enter a parse tree produced by SmartHomeStateMachineParser#actionMethod.
+    def enterActionMethod(self, ctx:SmartHomeStateMachineParser.ActionMethodContext):
         pass
 
-    # Exit a parse tree produced by SmartHomeStateMachineParser#deviceMethod.
-    def exitDeviceMethod(self, ctx:SmartHomeStateMachineParser.DeviceMethodContext):
+    # Exit a parse tree produced by SmartHomeStateMachineParser#actionMethod.
+    def exitActionMethod(self, ctx:SmartHomeStateMachineParser.ActionMethodContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#getterMethod.
+    def enterGetterMethod(self, ctx:SmartHomeStateMachineParser.GetterMethodContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#getterMethod.
+    def exitGetterMethod(self, ctx:SmartHomeStateMachineParser.GetterMethodContext):
         pass
 
 
@@ -89,6 +116,15 @@ class SmartHomeStateMachineListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SmartHomeStateMachineParser#delayParameter.
+    def enterDelayParameter(self, ctx:SmartHomeStateMachineParser.DelayParameterContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#delayParameter.
+    def exitDelayParameter(self, ctx:SmartHomeStateMachineParser.DelayParameterContext):
+        pass
+
+
     # Enter a parse tree produced by SmartHomeStateMachineParser#variableAssignment.
     def enterVariableAssignment(self, ctx:SmartHomeStateMachineParser.VariableAssignmentContext):
         pass
@@ -98,12 +134,30 @@ class SmartHomeStateMachineListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by SmartHomeStateMachineParser#variableName.
+    def enterVariableName(self, ctx:SmartHomeStateMachineParser.VariableNameContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#variableName.
+    def exitVariableName(self, ctx:SmartHomeStateMachineParser.VariableNameContext):
+        pass
+
+
     # Enter a parse tree produced by SmartHomeStateMachineParser#transitionDeclaration.
     def enterTransitionDeclaration(self, ctx:SmartHomeStateMachineParser.TransitionDeclarationContext):
         pass
 
     # Exit a parse tree produced by SmartHomeStateMachineParser#transitionDeclaration.
     def exitTransitionDeclaration(self, ctx:SmartHomeStateMachineParser.TransitionDeclarationContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#allStates.
+    def enterAllStates(self, ctx:SmartHomeStateMachineParser.AllStatesContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#allStates.
+    def exitAllStates(self, ctx:SmartHomeStateMachineParser.AllStatesContext):
         pass
 
 
@@ -122,6 +176,51 @@ class SmartHomeStateMachineListener(ParseTreeListener):
 
     # Exit a parse tree produced by SmartHomeStateMachineParser#expression.
     def exitExpression(self, ctx:SmartHomeStateMachineParser.ExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#andExpression.
+    def enterAndExpression(self, ctx:SmartHomeStateMachineParser.AndExpressionContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#andExpression.
+    def exitAndExpression(self, ctx:SmartHomeStateMachineParser.AndExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#comparisonExpression.
+    def enterComparisonExpression(self, ctx:SmartHomeStateMachineParser.ComparisonExpressionContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#comparisonExpression.
+    def exitComparisonExpression(self, ctx:SmartHomeStateMachineParser.ComparisonExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#arithmeticExpression.
+    def enterArithmeticExpression(self, ctx:SmartHomeStateMachineParser.ArithmeticExpressionContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#arithmeticExpression.
+    def exitArithmeticExpression(self, ctx:SmartHomeStateMachineParser.ArithmeticExpressionContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#term.
+    def enterTerm(self, ctx:SmartHomeStateMachineParser.TermContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#term.
+    def exitTerm(self, ctx:SmartHomeStateMachineParser.TermContext):
+        pass
+
+
+    # Enter a parse tree produced by SmartHomeStateMachineParser#factor.
+    def enterFactor(self, ctx:SmartHomeStateMachineParser.FactorContext):
+        pass
+
+    # Exit a parse tree produced by SmartHomeStateMachineParser#factor.
+    def exitFactor(self, ctx:SmartHomeStateMachineParser.FactorContext):
         pass
 
 
