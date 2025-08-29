@@ -1,4 +1,4 @@
-# Generated from C:/University/compiler/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
+# Generated from /home/erfan/code/compiler/final-project/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .SmartHomeStateMachineParser import SmartHomeStateMachineParser
