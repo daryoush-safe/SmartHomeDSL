@@ -31,11 +31,9 @@ pinMode(8, OUTPUT);
 void state_idle() {
   digitalWrite(13, LOW);
 }
-
 void state_alert() {
   digitalWrite(13, !digitalRead(13)); delay(500);
 }
-
 void state_comfortable() {
   digitalWrite(13, HIGH);
 }

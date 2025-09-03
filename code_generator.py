@@ -1,7 +1,7 @@
 import sys
 from required_code_collection.astTree import AST
-
-
+def joiner(list):
+    return "\n".join(list)
 class CodeGenerator:
     def __init__(self, ast: AST):
         self.ast = ast
@@ -236,15 +236,15 @@ State currentState = {list(self.states.keys())[0].upper()};
 
 {chr(10).join(helpers)}
 
-{"\n".join(out_code)}
+{joiner(out_code)}
 void setup() {{
   {chr(10).join(setup_code)}
   {chr(10).join(servo_setup)}
 }}
 
-{"\n\n".join(states_code)}
+{joiner(states_code)}
 
-{"\n".join(transition_code)}
+{joiner(transition_code)}
 
 void loop() {{
   checkTransitions();

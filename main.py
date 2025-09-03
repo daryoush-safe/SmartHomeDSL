@@ -6,7 +6,7 @@ from gen.SmartHomeStateMachineLexer import SmartHomeStateMachineLexer
 from gen.SmartHomeStateMachineParser import SmartHomeStateMachineParser
 
 from required_code_collection.ast_to_networkx_graph import show_ast
-from code_generator import CodeGenerator   # ✅ import the generator
+from code_generator import CodeGenerator
 
 
 def main(args):
@@ -35,12 +35,11 @@ def main(args):
     generator = CodeGenerator(ast.root)
     code = generator.generate()
 
-
     # --- Write to output file ---
     with open(args.output, "w") as f:
         f.write(code)
 
-    print(f"✅ Arduino code generated at {args.output}")
+    print(f"Arduino code generated at {args.output}")
 
     show_ast(ast.root)
 
