@@ -1,6 +1,6 @@
-device mainLED : LED pin 13;
+device mainLED : LED pin 12;
 device buzzer : BUZZER pin 8;
-device tempSensor : TEMPERATURE_SENSOR;
+device tempSensor : TEMPERATURE_SENSOR pin 13;
 
 state idle {
     mainLED.off()

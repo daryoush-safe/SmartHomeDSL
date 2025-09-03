@@ -3,6 +3,7 @@ from gen.SmartHomeStateMachineParser import SmartHomeStateMachineParser
 from required_code_collection.astTree import AST
 from required_code_collection.make_ast_subtree import make_ast_subtree
 
+
 class CustomListener(SmartHomeStateMachineListener):
     def __init__(self):
         # Rules where we override default AST handling
@@ -33,6 +34,45 @@ class CustomListener(SmartHomeStateMachineListener):
             'deviceDeclaration',
         ]
 
+        # List of analog device types
+        self.analog_devices = [
+            'TEMPERATURE_SENSOR',
+            'LIGHT_SENSOR',
+            'MOTION_SENSOR',
+            'ULTRASONIC_SENSOR',
+            'HUMIDITY_SENSOR',
+        ]
+
+        # list of analog pins for analog devices
+        self.analog_pins = [
+            '14', '15', '16', '17', '18', '19',
+        ]
+
+        # List of digital device types
+        self.digital_devices = [
+            'LED',
+            'BUTTON',
+            'SENSOR',
+            'RELAY',
+            'SERVO',
+            'LCD',
+            'BUZZER',
+            'RGB_LED',
+            'STEPPER_MOTOR',
+            'PWM_OUTPUT',
+            'DIGITAL_INPUT',
+            'DIGITAL_OUTPUT',
+            'ANALOG_INPUT',
+            'ANALOG_OUTPUT',
+            'POTENTIOMETER',
+            'DISPLAY',
+        ]
+        
+        # list of digital pins for digital devices
+        self.digital_pins = [
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13',
+        ]
+
         self.rule_names = []
         self.ast = AST()
 
@@ -49,7 +89,24 @@ class CustomListener(SmartHomeStateMachineListener):
     def exitProgram(self, ctx):
         make_ast_subtree(self.ast, ctx, "program", keep_node=True)
 
-    def exitDeviceDeclaration(self, ctx:SmartHomeStateMachineParser.DeviceDeclarationContext):
+    def exitDeviceDeclaration(self, ctx: SmartHomeStateMachineParser.DeviceDeclarationContext):
+        if ctx.getChildCount() > 4:
+            device_type = ctx.getChild(3).getText()
+            pin_number = None
+            for i in range(ctx.getChildCount()):
+                if ctx.getChild(i).getText() == 'pin' and i + 1 < ctx.getChildCount():
+                    pin_number = ctx.getChild(i + 1).getText()
+                    break
+
+            if pin_number is not None:
+                if (device_type in self.analog_devices and pin_number not in self.analog_pins):
+                    raise ValueError(
+                        f"Analog device '{device_type}' is not compatible with pin '{pin_number}'. Use analog pins: {', '.join(self.analog_pins)}")
+
+                elif (device_type in self.digital_devices and pin_number not in self.digital_pins):
+                    raise ValueError(
+                        f"Digital device '{device_type}' is not compatible with pin '{pin_number}'. Use digital pins: {', '.join(self.digital_pins)}")
+
         make_ast_subtree(self.ast, ctx, "device_dec", keep_node=True)
 
     def exitStateDeclaration(self, ctx:SmartHomeStateMachineParser.StateDeclarationContext):

@@ -23,19 +23,19 @@ float readUltrasonic(int pin) {
 const int tempSensor = A0;
 void setup() {
   Serial.begin(9600);
-pinMode(13, OUTPUT);
+pinMode(12, OUTPUT);
 pinMode(8, OUTPUT);
   
 }
 
 void state_idle() {
-  digitalWrite(13, LOW);
+  digitalWrite(12, LOW);
 }
 void state_alert() {
-  digitalWrite(13, !digitalRead(13)); delay(500);
+  digitalWrite(12, !digitalRead(12)); delay(500);
 }
 void state_comfortable() {
-  digitalWrite(13, HIGH);
+  digitalWrite(12, HIGH);
 }
 
 void checkTransitions() {
