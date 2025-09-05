@@ -38,8 +38,6 @@ class CustomListener(SmartHomeStateMachineListener):
         self.analog_devices = [
             'TEMPERATURE_SENSOR',
             'LIGHT_SENSOR',
-            'MOTION_SENSOR',
-            'ULTRASONIC_SENSOR',
             'HUMIDITY_SENSOR',
         ]
 
@@ -65,6 +63,8 @@ class CustomListener(SmartHomeStateMachineListener):
             'ANALOG_INPUT',
             'ANALOG_OUTPUT',
             'POTENTIOMETER',
+            'ULTRASONIC_SENSOR',
+            'MOTION_SENSOR',
             'DISPLAY',
         ]
         

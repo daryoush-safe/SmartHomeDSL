@@ -7,7 +7,7 @@ program
 
 // Device Declarations
 deviceDeclaration
-    : 'device' deviceName ':' deviceType ('pin' pinDeclaration)?';'
+    : 'device' deviceName ':' deviceType ('pin' pinDeclaration)? (',' 'pin' pinDeclaration)*';'
     ;
 
 deviceName
@@ -21,7 +21,7 @@ pinDeclaration
 deviceType
     : 'LED'
     | 'BUTTON'
-    | 'SENSOR'
+//    | 'SENSOR'
     | 'RELAY'
     | 'SERVO'
     | 'LCD'
@@ -31,7 +31,7 @@ deviceType
     | 'MOTION_SENSOR'
     | 'LIGHT_SENSOR'
     | 'ULTRASONIC_SENSOR'
-    | 'RGB_LED'
+//    | 'RGB_LED'
     | 'STEPPER_MOTOR'
     | 'PWM_OUTPUT'
     | 'DIGITAL_INPUT'

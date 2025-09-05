@@ -30,7 +30,7 @@ def main(args):
     # show_ast(ast.root)
 
     # --- Generate Arduino C++ code ---
-    # show_ast(ast.root)
+    show_ast(ast.root)
 
     generator = CodeGenerator(ast.root)
     code = generator.generate()
@@ -41,7 +41,7 @@ def main(args):
 
     print(f"Arduino code generated at {args.output}")
 
-    show_ast(ast.root)
+    # show_ast(ast.root)
 
 
 if __name__ == '__main__':

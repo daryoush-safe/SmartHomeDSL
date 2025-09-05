@@ -34,12 +34,14 @@ class CodeGenerator:
         # Example: device mainLED : LED pin 13;
         name = node.children[0].value
         dev_type = node.children[1].value
+        pinList = []
         if len(node.children) > 2:
-            if int(node.children[-1].value) <= 13:
-                pin = node.children[-1].value
-            else:
-                pin = f"A{int(node.children[-1].value) - 14}"
-        self.devices[name] = (dev_type, pin)
+            for i in range(2, len(node.children)):
+                if int(node.children[i].value) <= 13:
+                    pinList.append(node.children[i].value)
+                else:
+                    pinList.append(f"A{int(node.children[i].value) - 14}")
+        self.devices[name] = (dev_type, pinList)
 
     def _handle_state(self, node):
         state_name = node.children[0].value
@@ -67,22 +69,23 @@ class CodeGenerator:
         args = [c.value for c in node.children[2:]]
         dev_type, pin = self.devices[dev]
 
+
         # LED / DIGITAL_OUTPUT
         if dev_type in ["LED", "DIGITAL_OUTPUT"]:
             if action == "on":
-                return f"digitalWrite({pin}, HIGH);"
+                return f"digitalWrite({pin[0]}, HIGH);"
             elif action == "off":
-                return f"digitalWrite({pin}, LOW);"
+                return f"digitalWrite({pin[0]}, LOW);"
             elif action == "toggle":
-                return f"digitalWrite({pin}, !digitalRead({pin}));"
+                return f"digitalWrite({pin[0]}, !digitalRead({pin[0]}));"
             elif action == "blink":
                 delay_ms = args[0] if args else "500"
-                return f"digitalWrite({pin}, !digitalRead({pin})); delay({delay_ms});"
+                return f"digitalWrite({pin[0]}, !digitalRead({pin[0]})); delay({delay_ms});"
 
         if dev_type == "RGB_LED":
             if action == "setColor":
                 r, g, b = args if len(args) == 3 else ("255", "255", "255")
-                return f"analogWrite({pin}, {r}); // Simplified RGB (expand for multiple pins)"
+                return f"analogWrite({pin[0]}, {r}); // Simplified RGB (expand for multiple pins)"
 
         # BUTTON / DIGITAL_INPUT
         if dev_type in ["BUTTON", "DIGITAL_INPUT"]:
@@ -90,7 +93,7 @@ class CodeGenerator:
 
         # RELAY
         if dev_type == "RELAY":
-            return f"digitalWrite({pin}, {'HIGH' if action == 'on' else 'LOW'});"
+            return f"digitalWrite({pin[0]}, {'HIGH' if action == 'on' else 'LOW'});"
 
         # SERVO
         if dev_type == "SERVO":
@@ -103,21 +106,21 @@ class CodeGenerator:
         if dev_type in ["LCD", "DISPLAY"]:
             if action == "display":
                 text = args[0] if args else "\"\""
-                return f"{dev}.print({text});"
+                return f"lcd.clear();\n  lcd.print(\"{text}\");"
 
         # BUZZER
         if dev_type == "BUZZER":
             if action == "beep":
-                freq = args[0] if args else "1000"
-                return f"tone({pin}, {freq});"
+                ms = args[0] if args else "1000"
+                return f"tone({pin[0]}, {1000});\n  delay({ms});\n  noTone({pin[0]});"
             elif action == "off":
-                return f"noTone({pin});"
+                return f"noTone({pin[0]});"
 
         # PWM_OUTPUT / ANALOG_OUTPUT
         if dev_type in ["PWM_OUTPUT", "ANALOG_OUTPUT"]:
             if action in ["write", "setBrightness", "fade"]:
                 val = args[0] if args else "128"
-                return f"analogWrite({pin}, {val});"
+                return f"analogWrite({pin[0]}, {val});"
 
         return f"// Unknown device action {dev}.{action}"
 
@@ -152,11 +155,17 @@ class CodeGenerator:
     def _device_call(self, node):
         dev = node.children[0].value
         meth = node.children[1].value
+        device, pin = self.devices[dev]
         if dev in self.devices.keys():
             if meth == "getTemperature":
-                return f"readTemperature({dev})"
+                return f"readTemperature({pin[0]})"
             elif meth == "getLight":
-                return f"readLight({dev})"
+                return f"readLight({pin[0]})"
+            elif meth == "getDistance":
+                return f"readDistance({pin[0]}, {pin[1]})"
+            elif meth == "isMotionDetected":
+                return f"readMotion({pin[0]})"
+
 
             raise ValueError(f"method {meth} is not define.")
         else:
@@ -174,20 +183,23 @@ class CodeGenerator:
 
         for name, (dev_type, pin) in self.devices.items():
             if dev_type in ("LED", "RELAY", "BUZZER", "DIGITAL_OUTPUT"):
-                setup_code.append(f"pinMode({pin}, OUTPUT);")
+                setup_code.append(f"pinMode({pin[0]}, OUTPUT);")
             elif dev_type in ("BUTTON", "MOTION_SENSOR", "DIGITAL_INPUT"):
-                setup_code.append(f"pinMode({pin}, INPUT);")
+                setup_code.append(f"pinMode({pin[0]}, INPUT);")
             elif dev_type == "SERVO":
                 includes.append("#include <Servo.h>")
                 servo_setup.append(f"{name}.attach({pin});")
                 helpers.append(f"Servo {name};")
             elif dev_type == "LCD":
                 includes.append("#include <LiquidCrystal.h>")
-                helpers.append(f"LiquidCrystal {name}(12, 11, 5, 4, 3, 2); // Adjust pins")
-            elif dev_type == "TEMPERATURE_SENSOR":
-                out_code.append(f"const int {name} = {pin};")
-            elif dev_type == "LIGHT_SENSOR":
-                out_code.append(f"const int {name} = {pin};")
+                helpers.append(f"LiquidCrystal {name}({pin[0]}, {pin[1]}, {pin[2]}, {pin[3]}, {pin[4]}, {pin[5]}); // Adjust pins")
+                setup_code.append(f"lcd.begin(16, 2);  // Initialize 16x2 LCD")
+            elif dev_type in ("TEMPERATURE_SENSOR", "LIGHT_SENSOR", "MOTION_SENSOR"):
+                # out_code.append(f"const int {name} = {pin};")
+                setup_code.append(f"pinMode({pin[0]}, INPUT);")
+            elif dev_type == "ULTRASONIC_SENSOR":
+                setup_code.append(f"pinMode({pin[0]}, OUTPUT);")
+                setup_code.append(f"pinMode({pin[1]}, INPUT);")
             elif dev_type in ("TEMPERATURE_SENSOR", "HUMIDITY_SENSOR", "LIGHT_SENSOR", "POTENTIOMETER", "ANALOG_INPUT"):
                 setup_code.append(f"// {dev_type} on pin {pin}")
 
@@ -197,7 +209,7 @@ float readTemperature(int pin) {
   int v = analogRead(pin);
   float voltage = v * (5.0 / 1023.0);
   float value =  voltage * 100.0; // LM35
-  Serial.println("measured temperature: ");
+  Serial.print("temperature: ");
   Serial.println(value);
   return value;
 }
@@ -210,9 +222,40 @@ float readUltrasonic(int pin) {
 }
 float readLight(int pin) {
   int value = analogRead(pin);
-  Serial.println("measured light: ");
+  Serial.print("light: ");
   Serial.println(value);
   return value; // 0 (dark) to 1023 (bright)
+}
+float readDistance(int TRIG_PIN, int ECHO_PIN) {
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+
+  // Send 10 µs pulse
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  // Measure pulse duration
+  float duration = pulseIn(ECHO_PIN, HIGH);
+
+  // Calculate distance in cm
+  float distance = duration * 0.034 / 2;
+
+  // Print result
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+  return distance;
+}
+bool readMotion(int pirPin) {
+  int motion = digitalRead(pirPin);
+  if (motion == HIGH) {
+    Serial.println("Motion Detected!");
+    return true;
+  } else {
+    Serial.println("No Motion");
+    return false;
+  }
 }
 """)
 
