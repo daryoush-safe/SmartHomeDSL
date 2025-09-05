@@ -1,6 +1,7 @@
-device mainLED : LED pin 12;
+device mainLED : LED pin 13;
 device buzzer : BUZZER pin 8;
-device tempSensor : TEMPERATURE_SENSOR pin 13;
+device tempSensor : TEMPERATURE_SENSOR pin 14;
+device lightSensor : LIGHT_SENSOR pin 15;
 
 state idle {
     mainLED.off()
@@ -16,4 +17,6 @@ state comfortable {
 }
 
     transition idle -> alert when tempSensor.getTemperature() * 3 > 15;
+    transition idle -> comfortable when lightSensor.getLight() >= 100;
+
 

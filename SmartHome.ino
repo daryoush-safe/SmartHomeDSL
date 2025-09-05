@@ -9,7 +9,10 @@ State currentState = IDLE;
 float readTemperature(int pin) {
   int v = analogRead(pin);
   float voltage = v * (5.0 / 1023.0);
-  return voltage * 100.0; // LM35
+  float value =  voltage * 100.0; // LM35
+  Serial.println("measured temperature: ");
+  Serial.println(value);
+  return value;
 }
 float readHumidity(int pin) {
   return analogRead(pin) * 4.88 / 10; // Simplified
@@ -18,29 +21,40 @@ float readUltrasonic(int pin) {
   // Placeholder ultrasonic sensor logic
   return analogRead(pin);
 }
+float readLight(int pin) {
+  int value = analogRead(pin);
+  Serial.println("measured light: ");
+  Serial.println(value);
+  return value; // 0 (dark) to 1023 (bright)
+}
 
 
 const int tempSensor = A0;
+const int lightSensor = A1;
 void setup() {
-  Serial.begin(9600);
-pinMode(12, OUTPUT);
+Serial.println("Starting Program ...");
+Serial.begin(9600);
+pinMode(13, OUTPUT);
 pinMode(8, OUTPUT);
-  
+
 }
 
 void state_idle() {
-  digitalWrite(12, LOW);
+  digitalWrite(13, LOW);
 }
 void state_alert() {
-  digitalWrite(12, !digitalRead(12)); delay(500);
+  digitalWrite(13, !digitalRead(13)); delay(500);
 }
 void state_comfortable() {
-  digitalWrite(12, HIGH);
+  digitalWrite(13, HIGH);
 }
 
 void checkTransitions() {
   switch(currentState) {
-    case IDLE: if (readTemperature(tempSensor) * 3 > 15) currentState = ALERT; break;
+    case IDLE:
+      if (readTemperature(tempSensor) * 3 > 15) currentState = ALERT;
+      else if (readLight(lightSensor) >= 100) currentState = COMFORTABLE;
+      break;
   }
 }
 
@@ -49,4 +63,5 @@ void loop() {
   switch(currentState) {
     case IDLE: state_idle(); break;case ALERT: state_alert(); break;case COMFORTABLE: state_comfortable(); break;
   }
+  delay(200);
 }

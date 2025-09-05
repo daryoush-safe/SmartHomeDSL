@@ -66,7 +66,7 @@ actionMethod : 'on' | 'off' | 'toggle' | 'set' | 'write' | 'move' | 'display'
              ;
 
 getterMethod : 'read' | 'getDistance' | 'getTemperature' | 'getHumidity'
-             | 'isPressed' | 'isMotionDetected'
+             | 'isPressed' | 'isMotionDetected' | 'getLight'
              ;
 
 delayAction

@@ -1,7 +1,15 @@
 import sys
 from required_code_collection.astTree import AST
-def joiner(list):
-    return "\n".join(list)
+from collections import defaultdict
+
+
+def joiner(list, tab=False):
+    if tab:
+        return "\n\t".join(list)
+    else:
+        return "\n".join(list)
+
+
 class CodeGenerator:
     def __init__(self, ast: AST):
         self.ast = ast
@@ -26,9 +34,11 @@ class CodeGenerator:
         # Example: device mainLED : LED pin 13;
         name = node.children[0].value
         dev_type = node.children[1].value
-        pin = 'A0'
         if len(node.children) > 2:
-            pin = node.children[-1].value
+            if int(node.children[-1].value) <= 13:
+                pin = node.children[-1].value
+            else:
+                pin = f"A{int(node.children[-1].value) - 14}"
         self.devices[name] = (dev_type, pin)
 
     def _handle_state(self, node):
@@ -57,7 +67,7 @@ class CodeGenerator:
         args = [c.value for c in node.children[2:]]
         dev_type, pin = self.devices[dev]
 
-        # LED / RGB_LED
+        # LED / DIGITAL_OUTPUT
         if dev_type in ["LED", "DIGITAL_OUTPUT"]:
             if action == "on":
                 return f"digitalWrite({pin}, HIGH);"
@@ -121,28 +131,6 @@ class CodeGenerator:
     # --------------------------
     # Expressions (Conditions)
     # --------------------------
-    def _translate_expression(self, node):
-        # Example: doorSensor.isMotionDetected()
-        parts = [child.value for child in node.children]
-        expr = "".join(parts)
-
-        # Replace DSL getters with Arduino equivalents
-        for dev, (dev_type, pin) in self.devices.items():
-            if f"{dev}.isPressed()" in expr:
-                expr = expr.replace(f"{dev}.isPressed()", f"digitalRead({pin}) == LOW")
-            if f"{dev}.isMotionDetected()" in expr:
-                expr = expr.replace(f"{dev}.isMotionDetected()", f"digitalRead({pin}) == HIGH")
-            if f"{dev}.read()" in expr:
-                expr = expr.replace(f"{dev}.read()", f"analogRead({pin})")
-            if f"{dev}.getTemperature()" in expr:
-                expr = expr.replace(f"{dev}.getTemperature()", f"readTemperature({pin})")
-            if f"{dev}.getHumidity()" in expr:
-                expr = expr.replace(f"{dev}.getHumidity()", f"readHumidity({pin})")
-            if f"{dev}.getDistance()" in expr:
-                expr = expr.replace(f"{dev}.getDistance()", f"readUltrasonic({pin})")
-
-        return expr
-
     def _calc_con(self, node):
         res = ""
         if len(node.children) >= 2:
@@ -161,24 +149,24 @@ class CodeGenerator:
 
         return res
 
-
     def _device_call(self, node):
         dev = node.children[0].value
         meth = node.children[1].value
         if dev in self.devices.keys():
             if meth == "getTemperature":
                 return f"readTemperature({dev})"
+            elif meth == "getLight":
+                return f"readLight({dev})"
 
             raise ValueError(f"method {meth} is not define.")
         else:
             raise ValueError(f"device {dev} is not define.")
 
-
     # --------------------------
     # Code Assembly
     # --------------------------
     def _assemble_code(self):
-        setup_code = ["Serial.begin(9600);"]
+        setup_code = []
         out_code = []
         servo_setup = []
         includes = []
@@ -198,6 +186,8 @@ class CodeGenerator:
                 helpers.append(f"LiquidCrystal {name}(12, 11, 5, 4, 3, 2); // Adjust pins")
             elif dev_type == "TEMPERATURE_SENSOR":
                 out_code.append(f"const int {name} = {pin};")
+            elif dev_type == "LIGHT_SENSOR":
+                out_code.append(f"const int {name} = {pin};")
             elif dev_type in ("TEMPERATURE_SENSOR", "HUMIDITY_SENSOR", "LIGHT_SENSOR", "POTENTIOMETER", "ANALOG_INPUT"):
                 setup_code.append(f"// {dev_type} on pin {pin}")
 
@@ -206,7 +196,10 @@ class CodeGenerator:
 float readTemperature(int pin) {
   int v = analogRead(pin);
   float voltage = v * (5.0 / 1023.0);
-  return voltage * 100.0; // LM35
+  float value =  voltage * 100.0; // LM35
+  Serial.println("measured temperature: ");
+  Serial.println(value);
+  return value;
 }
 float readHumidity(int pin) {
   return analogRead(pin) * 4.88 / 10; // Simplified
@@ -215,6 +208,12 @@ float readUltrasonic(int pin) {
   // Placeholder ultrasonic sensor logic
   return analogRead(pin);
 }
+float readLight(int pin) {
+  int value = analogRead(pin);
+  Serial.println("measured light: ");
+  Serial.println(value);
+  return value; // 0 (dark) to 1023 (bright)
+}
 """)
 
         states_code = []
@@ -222,10 +221,24 @@ float readUltrasonic(int pin) {
             body = "\n  ".join(actions)
             states_code.append(f"void state_{state}() {{\n  {body}\n}}")
 
-        transition_code = ["void checkTransitions() {", "  switch(currentState) {"]
+        # ---- Group transitions by source ----
+        grouped_transitions = defaultdict(list)
         for src, dst, cond in self.transitions:
-            transition_code.append(f"    case {src.upper()}: if ({cond}) currentState = {dst.upper()}; break;")
-        transition_code.append("  }\n}")
+            grouped_transitions[src].append((dst, cond))
+
+        transition_code = ["void checkTransitions() {", "  switch(currentState) {"]
+
+        for src, rules in grouped_transitions.items():
+            transition_code.append(f"    case {src.upper()}:")
+            for i, (dst, cond) in enumerate(rules):
+                if i == 0:
+                    transition_code.append(f"      if ({cond}) currentState = {dst.upper()};")
+                else:
+                    transition_code.append(f"      else if ({cond}) currentState = {dst.upper()};")
+            transition_code.append("      break;")
+
+        transition_code.append("  }")
+        transition_code.append("}")
 
         return f"""
 // Auto-generated Arduino code
@@ -238,8 +251,10 @@ State currentState = {list(self.states.keys())[0].upper()};
 
 {joiner(out_code)}
 void setup() {{
-  {chr(10).join(setup_code)}
-  {chr(10).join(servo_setup)}
+Serial.println("Starting Program ...");
+Serial.begin(9600);
+{joiner(setup_code)}
+{joiner(servo_setup)}
 }}
 
 {joiner(states_code)}
@@ -251,9 +266,9 @@ void loop() {{
   switch(currentState) {{
     {"".join(f"case {s.upper()}: state_{s}(); break;" for s in self.states.keys())}
   }}
+  delay(200);
 }}
 """
-
 
 # -------------------------------
 # CLI entrypoint
