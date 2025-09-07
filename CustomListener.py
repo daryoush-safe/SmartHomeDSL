@@ -144,7 +144,7 @@ class CustomListener(SmartHomeStateMachineListener):
         # key: device name, value: device type
         self.devices_lookup = {}
         # declared states
-        self.states_lookup = []
+        self.states_lookup = ['*']
 
         self.rule_names = []
         self.ast = AST()
