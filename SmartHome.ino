@@ -1,11 +1,11 @@
 
 // Auto-generated Arduino code
-#include <LiquidCrystal.h>
+#include <DHT.h>
 
 enum State { IDLE, ALERT, COMFORTABLE };
 State currentState = IDLE;
 
-LiquidCrystal lcd(12, 11, 10, 9, 8, 7); // Adjust pins
+DHT humSensor(A1, DHT11);
 
 float readTemperature(int pin) {
   int v = analogRead(pin);
@@ -15,8 +15,16 @@ float readTemperature(int pin) {
   Serial.println(value);
   return value;
 }
-float readHumidity(int pin) {
-  return analogRead(pin) * 4.88 / 10; // Simplified
+float readHumidity(DHT &sensor) {
+  float h = sensor.readHumidity();
+  if (isnan(h)) {
+    Serial.println("Failed to read from DHT sensor!");
+    return -1;
+  }
+  Serial.print("Humidity: ");
+  Serial.print(h);
+  Serial.println(" %");
+  return h;
 }
 float readUltrasonic(int pin) {
   // Placeholder ultrasonic sensor logic
@@ -66,12 +74,10 @@ void setup() {
 Serial.println("Starting Program ...");
 Serial.begin(9600);
 pinMode(13, OUTPUT);
-pinMode(A1, INPUT);
-pinMode(A1, INPUT);
+pinMode(A0, INPUT);
 pinMode(2, OUTPUT);
 pinMode(3, INPUT);
 pinMode(4, INPUT);
-lcd.begin(16, 2);  // Initialize 16x2 LCD
 
 }
 
@@ -83,19 +89,15 @@ void state_alert() {
 }
 void state_comfortable() {
   digitalWrite(13, HIGH);
-  lcd.clear();
-  lcd.print("comfortable");
 }
 
 void checkTransitions() {
   switch(currentState) {
     case IDLE:
-      if (readTemperature(A1) * 3 > 15) currentState = ALERT;
-      else if (readDistance(2, 3) > 15) currentState = ALERT;
-      else if (readLight(A1) >= 100) currentState = COMFORTABLE;
+      if (readHumidity(humSensor) >= 30) currentState = COMFORTABLE;
       break;
     case ALERT:
-      if (readMotion(4) &&readTemperature(A1) < 3) currentState = IDLE;
+      if (readMotion(4) &&readTemperature(A0) < 3) currentState = IDLE;
       break;
   }
 }

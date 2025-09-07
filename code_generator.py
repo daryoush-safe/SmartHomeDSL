@@ -165,7 +165,8 @@ class CodeGenerator:
                 return f"readDistance({pin[0]}, {pin[1]})"
             elif meth == "isMotionDetected":
                 return f"readMotion({pin[0]})"
-
+            elif meth == 'getHumidity':
+                return f"readHumidity({dev})"
 
             raise ValueError(f"method {meth} is not define.")
         else:
@@ -191,7 +192,8 @@ class CodeGenerator:
                 servo_setup.append(f"{name}.attach({pin});")
                 helpers.append(f"Servo {name};")
             elif dev_type == "LCD":
-                includes.append("#include <LiquidCrystal.h>")
+                if "#include <LiquidCrystal.h>" not in includes:
+                    includes.append("#include <LiquidCrystal.h>")
                 helpers.append(f"LiquidCrystal {name}({pin[0]}, {pin[1]}, {pin[2]}, {pin[3]}, {pin[4]}, {pin[5]}); // Adjust pins")
                 setup_code.append(f"lcd.begin(16, 2);  // Initialize 16x2 LCD")
             elif dev_type in ("TEMPERATURE_SENSOR", "LIGHT_SENSOR", "MOTION_SENSOR"):
@@ -200,6 +202,10 @@ class CodeGenerator:
             elif dev_type == "ULTRASONIC_SENSOR":
                 setup_code.append(f"pinMode({pin[0]}, OUTPUT);")
                 setup_code.append(f"pinMode({pin[1]}, INPUT);")
+            elif dev_type == "HUMIDITY_SENSOR":
+                if "#include <DHT.h>" not in includes:
+                    includes.append("#include <DHT.h>")
+                helpers.append(f"DHT {name}({pin[0]}, DHT11);")
             elif dev_type in ("TEMPERATURE_SENSOR", "HUMIDITY_SENSOR", "LIGHT_SENSOR", "POTENTIOMETER", "ANALOG_INPUT"):
                 setup_code.append(f"// {dev_type} on pin {pin}")
 
@@ -213,8 +219,16 @@ float readTemperature(int pin) {
   Serial.println(value);
   return value;
 }
-float readHumidity(int pin) {
-  return analogRead(pin) * 4.88 / 10; // Simplified
+float readHumidity(DHT &sensor) {
+  float h = sensor.readHumidity();
+  if (isnan(h)) {
+    Serial.println("Failed to read from DHT sensor!");
+    return -1;
+  }
+  Serial.print("Humidity: ");
+  Serial.print(h);
+  Serial.println(" %");
+  return h;
 }
 float readUltrasonic(int pin) {
   // Placeholder ultrasonic sensor logic
