@@ -32,7 +32,7 @@ float readDistance(int TRIG_PIN, int ECHO_PIN) {
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
 
-  // Send 10 Âµs pulse
+  // Send 10 µs pulse
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
@@ -66,7 +66,7 @@ void setup() {
 Serial.println("Starting Program ...");
 Serial.begin(9600);
 pinMode(13, OUTPUT);
-pinMode(A0, INPUT);
+pinMode(A1, INPUT);
 pinMode(A1, INPUT);
 pinMode(2, OUTPUT);
 pinMode(3, INPUT);
@@ -90,12 +90,12 @@ void state_comfortable() {
 void checkTransitions() {
   switch(currentState) {
     case IDLE:
-      if (readTemperature(A0) * 3 > 15) currentState = ALERT;
+      if (readTemperature(A1) * 3 > 15) currentState = ALERT;
       else if (readDistance(2, 3) > 15) currentState = ALERT;
       else if (readLight(A1) >= 100) currentState = COMFORTABLE;
       break;
     case ALERT:
-      if (readMotion(4) &&readTemperature(A0) < 3) currentState = IDLE;
+      if (readMotion(4) &&readTemperature(A1) < 3) currentState = IDLE;
       break;
   }
 }
