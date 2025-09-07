@@ -1,0 +1,24 @@
+device mainLED : LED pin 13;
+device doorSensor : MOTION_SENSOR pin 2;
+device tempSensor : TEMPERATURE_SENSOR pin 4;
+device buzzer : BUZZER pin 8;
+
+state idle {
+    mainLED.blink()
+}
+
+state alert {
+    mainLED.blink(500),
+    buzzer.beep(1000),
+    delay(2000)
+}
+
+state comfortable {
+    mainLED.on()
+}
+
+transition idle -> alert when doorSensor.isMotionDetected();
+transition * -> alert when doorSensor.isMotionDetected();
+transition alert -> idle when !doorSensor.isMotionDetected();
+transition idle -> comfortable when tempSensor.getTemperature() > 20 && tempSensor.getTemperature() < 25;
+transition idle -> comfortable when tempSensor.getTemperature() >= 20 || tempSensor.getTemperature() < tempSensor.getTemperature();

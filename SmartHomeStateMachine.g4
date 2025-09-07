@@ -19,27 +19,7 @@ pinDeclaration
     ;
 
 deviceType
-    : 'LED'
-    | 'BUTTON'
-    | 'SENSOR'
-    | 'RELAY'
-    | 'SERVO'
-    | 'LCD'
-    | 'BUZZER'
-    | 'TEMPERATURE_SENSOR'
-    | 'HUMIDITY_SENSOR'
-    | 'MOTION_SENSOR'
-    | 'LIGHT_SENSOR'
-    | 'ULTRASONIC_SENSOR'
-    | 'RGB_LED'
-    | 'STEPPER_MOTOR'
-    | 'PWM_OUTPUT'
-    | 'DIGITAL_INPUT'
-    | 'DIGITAL_OUTPUT'
-    | 'ANALOG_INPUT'
-    | 'ANALOG_OUTPUT'
-    | 'POTENTIOMETER'
-    | 'DISPLAY'
+    : IDENTIFIER
     ;
 
 // State Declarations
@@ -61,13 +41,12 @@ deviceAction : deviceName '.' actionMethod '(' (expression (',' expression)*)? '
              | deviceName '.' getterMethod '(' ')'
              ;
 
-actionMethod : 'on' | 'off' | 'toggle' | 'set' | 'write' | 'move' | 'display'
-             | 'beep' | 'fade' | 'blink' | 'setColor' | 'setBrightness'
-             ;
-
-getterMethod : 'read' | 'getDistance' | 'getTemperature' | 'getHumidity'
-             | 'isPressed' | 'isMotionDetected'
-             ;
+actionMethod :
+    IDENTIFIER
+    ;
+getterMethod :
+    IDENTIFIER
+    ;
 
 delayAction
     : 'delay' '(' delayParameter ')'

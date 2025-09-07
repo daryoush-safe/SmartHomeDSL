@@ -1,4 +1,4 @@
-# Generated from C:/University/compiler/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
+# Generated from C:/compiler_project/dev/SmartHomeDSL/SmartHomeStateMachine.g4 by ANTLR 4.13.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,77,239,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,38,239,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,1,0,1,0,1,0,5,0,54,
@@ -30,66 +30,65 @@ def serializedATN():
         1,23,1,23,1,23,3,23,221,8,23,1,24,1,24,1,24,1,24,1,24,1,24,1,24,
         5,24,230,8,24,10,24,12,24,233,9,24,3,24,235,8,24,1,24,1,24,1,24,
         0,5,36,38,40,42,44,25,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,
-        32,34,36,38,40,42,44,46,48,0,6,1,0,1,21,1,0,22,33,1,0,34,39,1,0,
-        60,65,1,0,66,67,1,0,68,70,238,0,55,1,0,0,0,2,60,1,0,0,0,4,70,1,0,
-        0,0,6,72,1,0,0,0,8,74,1,0,0,0,10,76,1,0,0,0,12,91,1,0,0,0,14,96,
-        1,0,0,0,16,120,1,0,0,0,18,122,1,0,0,0,20,124,1,0,0,0,22,126,1,0,
-        0,0,24,131,1,0,0,0,26,133,1,0,0,0,28,137,1,0,0,0,30,139,1,0,0,0,
-        32,150,1,0,0,0,34,152,1,0,0,0,36,154,1,0,0,0,38,165,1,0,0,0,40,176,
-        1,0,0,0,42,187,1,0,0,0,44,198,1,0,0,0,46,220,1,0,0,0,48,222,1,0,
-        0,0,50,54,3,2,1,0,51,54,3,10,5,0,52,54,3,30,15,0,53,50,1,0,0,0,53,
-        51,1,0,0,0,53,52,1,0,0,0,54,57,1,0,0,0,55,53,1,0,0,0,55,56,1,0,0,
-        0,56,58,1,0,0,0,57,55,1,0,0,0,58,59,5,0,0,1,59,1,1,0,0,0,60,61,5,
-        40,0,0,61,62,3,4,2,0,62,63,5,56,0,0,63,66,3,8,4,0,64,65,5,44,0,0,
-        65,67,3,6,3,0,66,64,1,0,0,0,66,67,1,0,0,0,67,68,1,0,0,0,68,69,5,
-        50,0,0,69,3,1,0,0,0,70,71,5,74,0,0,71,5,1,0,0,0,72,73,5,71,0,0,73,
-        7,1,0,0,0,74,75,7,0,0,0,75,9,1,0,0,0,76,77,5,41,0,0,77,78,3,12,6,
-        0,78,87,5,54,0,0,79,84,3,14,7,0,80,81,5,51,0,0,81,83,3,14,7,0,82,
-        80,1,0,0,0,83,86,1,0,0,0,84,82,1,0,0,0,84,85,1,0,0,0,85,88,1,0,0,
-        0,86,84,1,0,0,0,87,79,1,0,0,0,87,88,1,0,0,0,88,89,1,0,0,0,89,90,
-        5,55,0,0,90,11,1,0,0,0,91,92,5,74,0,0,92,13,1,0,0,0,93,97,3,16,8,
-        0,94,97,3,22,11,0,95,97,3,26,13,0,96,93,1,0,0,0,96,94,1,0,0,0,96,
-        95,1,0,0,0,97,15,1,0,0,0,98,99,3,4,2,0,99,100,5,49,0,0,100,101,3,
-        18,9,0,101,110,5,52,0,0,102,107,3,36,18,0,103,104,5,51,0,0,104,106,
-        3,36,18,0,105,103,1,0,0,0,106,109,1,0,0,0,107,105,1,0,0,0,107,108,
-        1,0,0,0,108,111,1,0,0,0,109,107,1,0,0,0,110,102,1,0,0,0,110,111,
-        1,0,0,0,111,112,1,0,0,0,112,113,5,53,0,0,113,121,1,0,0,0,114,115,
-        3,4,2,0,115,116,5,49,0,0,116,117,3,20,10,0,117,118,5,52,0,0,118,
-        119,5,53,0,0,119,121,1,0,0,0,120,98,1,0,0,0,120,114,1,0,0,0,121,
-        17,1,0,0,0,122,123,7,1,0,0,123,19,1,0,0,0,124,125,7,2,0,0,125,21,
-        1,0,0,0,126,127,5,46,0,0,127,128,5,52,0,0,128,129,3,24,12,0,129,
-        130,5,53,0,0,130,23,1,0,0,0,131,132,5,71,0,0,132,25,1,0,0,0,133,
-        134,3,28,14,0,134,135,5,47,0,0,135,136,3,36,18,0,136,27,1,0,0,0,
-        137,138,5,74,0,0,138,29,1,0,0,0,139,142,5,42,0,0,140,143,3,12,6,
-        0,141,143,3,32,16,0,142,140,1,0,0,0,142,141,1,0,0,0,143,144,1,0,
-        0,0,144,145,5,48,0,0,145,146,3,12,6,0,146,147,5,43,0,0,147,148,3,
-        34,17,0,148,149,5,50,0,0,149,31,1,0,0,0,150,151,5,68,0,0,151,33,
-        1,0,0,0,152,153,3,36,18,0,153,35,1,0,0,0,154,155,6,18,-1,0,155,156,
-        3,38,19,0,156,162,1,0,0,0,157,158,10,2,0,0,158,159,5,58,0,0,159,
-        161,3,38,19,0,160,157,1,0,0,0,161,164,1,0,0,0,162,160,1,0,0,0,162,
-        163,1,0,0,0,163,37,1,0,0,0,164,162,1,0,0,0,165,166,6,19,-1,0,166,
-        167,3,40,20,0,167,173,1,0,0,0,168,169,10,2,0,0,169,170,5,57,0,0,
-        170,172,3,40,20,0,171,168,1,0,0,0,172,175,1,0,0,0,173,171,1,0,0,
-        0,173,174,1,0,0,0,174,39,1,0,0,0,175,173,1,0,0,0,176,177,6,20,-1,
-        0,177,178,3,42,21,0,178,184,1,0,0,0,179,180,10,2,0,0,180,181,7,3,
-        0,0,181,183,3,42,21,0,182,179,1,0,0,0,183,186,1,0,0,0,184,182,1,
-        0,0,0,184,185,1,0,0,0,185,41,1,0,0,0,186,184,1,0,0,0,187,188,6,21,
-        -1,0,188,189,3,44,22,0,189,195,1,0,0,0,190,191,10,2,0,0,191,192,
-        7,4,0,0,192,194,3,44,22,0,193,190,1,0,0,0,194,197,1,0,0,0,195,193,
-        1,0,0,0,195,196,1,0,0,0,196,43,1,0,0,0,197,195,1,0,0,0,198,199,6,
-        22,-1,0,199,200,3,46,23,0,200,206,1,0,0,0,201,202,10,2,0,0,202,203,
-        7,5,0,0,203,205,3,46,23,0,204,201,1,0,0,0,205,208,1,0,0,0,206,204,
-        1,0,0,0,206,207,1,0,0,0,207,45,1,0,0,0,208,206,1,0,0,0,209,210,5,
-        59,0,0,210,221,3,46,23,0,211,212,5,52,0,0,212,213,3,36,18,0,213,
-        214,5,53,0,0,214,221,1,0,0,0,215,221,3,48,24,0,216,221,5,74,0,0,
-        217,221,5,71,0,0,218,221,5,72,0,0,219,221,5,73,0,0,220,209,1,0,0,
+        32,34,36,38,40,42,44,46,48,0,3,1,0,21,26,1,0,27,28,1,0,29,31,238,
+        0,55,1,0,0,0,2,60,1,0,0,0,4,70,1,0,0,0,6,72,1,0,0,0,8,74,1,0,0,0,
+        10,76,1,0,0,0,12,91,1,0,0,0,14,96,1,0,0,0,16,120,1,0,0,0,18,122,
+        1,0,0,0,20,124,1,0,0,0,22,126,1,0,0,0,24,131,1,0,0,0,26,133,1,0,
+        0,0,28,137,1,0,0,0,30,139,1,0,0,0,32,150,1,0,0,0,34,152,1,0,0,0,
+        36,154,1,0,0,0,38,165,1,0,0,0,40,176,1,0,0,0,42,187,1,0,0,0,44,198,
+        1,0,0,0,46,220,1,0,0,0,48,222,1,0,0,0,50,54,3,2,1,0,51,54,3,10,5,
+        0,52,54,3,30,15,0,53,50,1,0,0,0,53,51,1,0,0,0,53,52,1,0,0,0,54,57,
+        1,0,0,0,55,53,1,0,0,0,55,56,1,0,0,0,56,58,1,0,0,0,57,55,1,0,0,0,
+        58,59,5,0,0,1,59,1,1,0,0,0,60,61,5,1,0,0,61,62,3,4,2,0,62,63,5,17,
+        0,0,63,66,3,8,4,0,64,65,5,5,0,0,65,67,3,6,3,0,66,64,1,0,0,0,66,67,
+        1,0,0,0,67,68,1,0,0,0,68,69,5,11,0,0,69,3,1,0,0,0,70,71,5,35,0,0,
+        71,5,1,0,0,0,72,73,5,32,0,0,73,7,1,0,0,0,74,75,5,35,0,0,75,9,1,0,
+        0,0,76,77,5,2,0,0,77,78,3,12,6,0,78,87,5,15,0,0,79,84,3,14,7,0,80,
+        81,5,12,0,0,81,83,3,14,7,0,82,80,1,0,0,0,83,86,1,0,0,0,84,82,1,0,
+        0,0,84,85,1,0,0,0,85,88,1,0,0,0,86,84,1,0,0,0,87,79,1,0,0,0,87,88,
+        1,0,0,0,88,89,1,0,0,0,89,90,5,16,0,0,90,11,1,0,0,0,91,92,5,35,0,
+        0,92,13,1,0,0,0,93,97,3,16,8,0,94,97,3,22,11,0,95,97,3,26,13,0,96,
+        93,1,0,0,0,96,94,1,0,0,0,96,95,1,0,0,0,97,15,1,0,0,0,98,99,3,4,2,
+        0,99,100,5,10,0,0,100,101,3,18,9,0,101,110,5,13,0,0,102,107,3,36,
+        18,0,103,104,5,12,0,0,104,106,3,36,18,0,105,103,1,0,0,0,106,109,
+        1,0,0,0,107,105,1,0,0,0,107,108,1,0,0,0,108,111,1,0,0,0,109,107,
+        1,0,0,0,110,102,1,0,0,0,110,111,1,0,0,0,111,112,1,0,0,0,112,113,
+        5,14,0,0,113,121,1,0,0,0,114,115,3,4,2,0,115,116,5,10,0,0,116,117,
+        3,20,10,0,117,118,5,13,0,0,118,119,5,14,0,0,119,121,1,0,0,0,120,
+        98,1,0,0,0,120,114,1,0,0,0,121,17,1,0,0,0,122,123,5,35,0,0,123,19,
+        1,0,0,0,124,125,5,35,0,0,125,21,1,0,0,0,126,127,5,7,0,0,127,128,
+        5,13,0,0,128,129,3,24,12,0,129,130,5,14,0,0,130,23,1,0,0,0,131,132,
+        5,32,0,0,132,25,1,0,0,0,133,134,3,28,14,0,134,135,5,8,0,0,135,136,
+        3,36,18,0,136,27,1,0,0,0,137,138,5,35,0,0,138,29,1,0,0,0,139,142,
+        5,3,0,0,140,143,3,12,6,0,141,143,3,32,16,0,142,140,1,0,0,0,142,141,
+        1,0,0,0,143,144,1,0,0,0,144,145,5,9,0,0,145,146,3,12,6,0,146,147,
+        5,4,0,0,147,148,3,34,17,0,148,149,5,11,0,0,149,31,1,0,0,0,150,151,
+        5,29,0,0,151,33,1,0,0,0,152,153,3,36,18,0,153,35,1,0,0,0,154,155,
+        6,18,-1,0,155,156,3,38,19,0,156,162,1,0,0,0,157,158,10,2,0,0,158,
+        159,5,19,0,0,159,161,3,38,19,0,160,157,1,0,0,0,161,164,1,0,0,0,162,
+        160,1,0,0,0,162,163,1,0,0,0,163,37,1,0,0,0,164,162,1,0,0,0,165,166,
+        6,19,-1,0,166,167,3,40,20,0,167,173,1,0,0,0,168,169,10,2,0,0,169,
+        170,5,18,0,0,170,172,3,40,20,0,171,168,1,0,0,0,172,175,1,0,0,0,173,
+        171,1,0,0,0,173,174,1,0,0,0,174,39,1,0,0,0,175,173,1,0,0,0,176,177,
+        6,20,-1,0,177,178,3,42,21,0,178,184,1,0,0,0,179,180,10,2,0,0,180,
+        181,7,0,0,0,181,183,3,42,21,0,182,179,1,0,0,0,183,186,1,0,0,0,184,
+        182,1,0,0,0,184,185,1,0,0,0,185,41,1,0,0,0,186,184,1,0,0,0,187,188,
+        6,21,-1,0,188,189,3,44,22,0,189,195,1,0,0,0,190,191,10,2,0,0,191,
+        192,7,1,0,0,192,194,3,44,22,0,193,190,1,0,0,0,194,197,1,0,0,0,195,
+        193,1,0,0,0,195,196,1,0,0,0,196,43,1,0,0,0,197,195,1,0,0,0,198,199,
+        6,22,-1,0,199,200,3,46,23,0,200,206,1,0,0,0,201,202,10,2,0,0,202,
+        203,7,2,0,0,203,205,3,46,23,0,204,201,1,0,0,0,205,208,1,0,0,0,206,
+        204,1,0,0,0,206,207,1,0,0,0,207,45,1,0,0,0,208,206,1,0,0,0,209,210,
+        5,20,0,0,210,221,3,46,23,0,211,212,5,13,0,0,212,213,3,36,18,0,213,
+        214,5,14,0,0,214,221,1,0,0,0,215,221,3,48,24,0,216,221,5,35,0,0,
+        217,221,5,32,0,0,218,221,5,33,0,0,219,221,5,34,0,0,220,209,1,0,0,
         0,220,211,1,0,0,0,220,215,1,0,0,0,220,216,1,0,0,0,220,217,1,0,0,
         0,220,218,1,0,0,0,220,219,1,0,0,0,221,47,1,0,0,0,222,223,3,4,2,0,
-        223,224,5,49,0,0,224,225,3,20,10,0,225,234,5,52,0,0,226,231,3,36,
-        18,0,227,228,5,51,0,0,228,230,3,36,18,0,229,227,1,0,0,0,230,233,
+        223,224,5,10,0,0,224,225,3,20,10,0,225,234,5,13,0,0,226,231,3,36,
+        18,0,227,228,5,12,0,0,228,230,3,36,18,0,229,227,1,0,0,0,230,233,
         1,0,0,0,231,229,1,0,0,0,231,232,1,0,0,0,232,235,1,0,0,0,233,231,
         1,0,0,0,234,226,1,0,0,0,234,235,1,0,0,0,235,236,1,0,0,0,236,237,
-        5,53,0,0,237,49,1,0,0,0,18,53,55,66,84,87,96,107,110,120,142,162,
+        5,14,0,0,237,49,1,0,0,0,18,53,55,66,84,87,96,107,110,120,142,162,
         173,184,195,206,220,231,234
     ]
 
@@ -103,40 +102,19 @@ class SmartHomeStateMachineParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'LED'", "'BUTTON'", "'SENSOR'", "'RELAY'", 
-                     "'SERVO'", "'LCD'", "'BUZZER'", "'TEMPERATURE_SENSOR'", 
-                     "'HUMIDITY_SENSOR'", "'MOTION_SENSOR'", "'LIGHT_SENSOR'", 
-                     "'ULTRASONIC_SENSOR'", "'RGB_LED'", "'STEPPER_MOTOR'", 
-                     "'PWM_OUTPUT'", "'DIGITAL_INPUT'", "'DIGITAL_OUTPUT'", 
-                     "'ANALOG_INPUT'", "'ANALOG_OUTPUT'", "'POTENTIOMETER'", 
-                     "'DISPLAY'", "'on'", "'off'", "'toggle'", "'set'", 
-                     "'write'", "'move'", "'display'", "'beep'", "'fade'", 
-                     "'blink'", "'setColor'", "'setBrightness'", "'read'", 
-                     "'getDistance'", "'getTemperature'", "'getHumidity'", 
-                     "'isPressed'", "'isMotionDetected'", "'device'", "'state'", 
-                     "'transition'", "'when'", "'pin'", "'address'", "'delay'", 
-                     "'='", "'->'", "'.'", "';'", "','", "'('", "')'", "'{'", 
-                     "'}'", "':'", "'&&'", "'||'", "'!'", "'=='", "'!='", 
-                     "'<'", "'>'", "'<='", "'>='", "'+'", "'-'", "'*'", 
-                     "'/'", "'%'" ]
+    literalNames = [ "<INVALID>", "'device'", "'state'", "'transition'", 
+                     "'when'", "'pin'", "'address'", "'delay'", "'='", "'->'", 
+                     "'.'", "';'", "','", "'('", "')'", "'{'", "'}'", "':'", 
+                     "'&&'", "'||'", "'!'", "'=='", "'!='", "'<'", "'>'", 
+                     "'<='", "'>='", "'+'", "'-'", "'*'", "'/'", "'%'" ]
 
-    symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "DEVICE", "STATE", "TRANSITION", "WHEN", "PIN", "ADDRESS", 
-                      "DELAY", "ASSIGN", "ARROW", "DOT", "SEMICOLON", "COMMA", 
-                      "LPAREN", "RPAREN", "LBRACE", "RBRACE", "COLON", "AND", 
-                      "OR", "NOT", "EQ", "NE", "LT", "GT", "LE", "GE", "PLUS", 
-                      "MINUS", "MULTIPLY", "DIVIDE", "MODULO", "NUMBER", 
-                      "STRING", "BOOLEAN", "IDENTIFIER", "WS", "LINE_COMMENT", 
-                      "BLOCK_COMMENT" ]
+    symbolicNames = [ "<INVALID>", "DEVICE", "STATE", "TRANSITION", "WHEN", 
+                      "PIN", "ADDRESS", "DELAY", "ASSIGN", "ARROW", "DOT", 
+                      "SEMICOLON", "COMMA", "LPAREN", "RPAREN", "LBRACE", 
+                      "RBRACE", "COLON", "AND", "OR", "NOT", "EQ", "NE", 
+                      "LT", "GT", "LE", "GE", "PLUS", "MINUS", "MULTIPLY", 
+                      "DIVIDE", "MODULO", "NUMBER", "STRING", "BOOLEAN", 
+                      "IDENTIFIER", "WS", "LINE_COMMENT", "BLOCK_COMMENT" ]
 
     RULE_program = 0
     RULE_deviceDeclaration = 1
@@ -173,83 +151,44 @@ class SmartHomeStateMachineParser ( Parser ):
                    "term", "factor", "deviceCall" ]
 
     EOF = Token.EOF
-    T__0=1
-    T__1=2
-    T__2=3
-    T__3=4
-    T__4=5
-    T__5=6
-    T__6=7
-    T__7=8
-    T__8=9
-    T__9=10
-    T__10=11
-    T__11=12
-    T__12=13
-    T__13=14
-    T__14=15
-    T__15=16
-    T__16=17
-    T__17=18
-    T__18=19
-    T__19=20
-    T__20=21
-    T__21=22
-    T__22=23
-    T__23=24
-    T__24=25
-    T__25=26
-    T__26=27
-    T__27=28
-    T__28=29
-    T__29=30
-    T__30=31
-    T__31=32
-    T__32=33
-    T__33=34
-    T__34=35
-    T__35=36
-    T__36=37
-    T__37=38
-    T__38=39
-    DEVICE=40
-    STATE=41
-    TRANSITION=42
-    WHEN=43
-    PIN=44
-    ADDRESS=45
-    DELAY=46
-    ASSIGN=47
-    ARROW=48
-    DOT=49
-    SEMICOLON=50
-    COMMA=51
-    LPAREN=52
-    RPAREN=53
-    LBRACE=54
-    RBRACE=55
-    COLON=56
-    AND=57
-    OR=58
-    NOT=59
-    EQ=60
-    NE=61
-    LT=62
-    GT=63
-    LE=64
-    GE=65
-    PLUS=66
-    MINUS=67
-    MULTIPLY=68
-    DIVIDE=69
-    MODULO=70
-    NUMBER=71
-    STRING=72
-    BOOLEAN=73
-    IDENTIFIER=74
-    WS=75
-    LINE_COMMENT=76
-    BLOCK_COMMENT=77
+    DEVICE=1
+    STATE=2
+    TRANSITION=3
+    WHEN=4
+    PIN=5
+    ADDRESS=6
+    DELAY=7
+    ASSIGN=8
+    ARROW=9
+    DOT=10
+    SEMICOLON=11
+    COMMA=12
+    LPAREN=13
+    RPAREN=14
+    LBRACE=15
+    RBRACE=16
+    COLON=17
+    AND=18
+    OR=19
+    NOT=20
+    EQ=21
+    NE=22
+    LT=23
+    GT=24
+    LE=25
+    GE=26
+    PLUS=27
+    MINUS=28
+    MULTIPLY=29
+    DIVIDE=30
+    MODULO=31
+    NUMBER=32
+    STRING=33
+    BOOLEAN=34
+    IDENTIFIER=35
+    WS=36
+    LINE_COMMENT=37
+    BLOCK_COMMENT=38
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -321,19 +260,19 @@ class SmartHomeStateMachineParser ( Parser ):
             self.state = 55
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 7696581394432) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 14) != 0):
                 self.state = 53
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [40]:
+                if token in [1]:
                     self.state = 50
                     self.deviceDeclaration()
                     pass
-                elif token in [41]:
+                elif token in [2]:
                     self.state = 51
                     self.stateDeclaration()
                     pass
-                elif token in [42]:
+                elif token in [3]:
                     self.state = 52
                     self.transitionDeclaration()
                     pass
@@ -424,7 +363,7 @@ class SmartHomeStateMachineParser ( Parser ):
             self.state = 66
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==44:
+            if _la==5:
                 self.state = 64
                 self.match(SmartHomeStateMachineParser.PIN)
                 self.state = 65
@@ -543,6 +482,8 @@ class SmartHomeStateMachineParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IDENTIFIER(self):
+            return self.getToken(SmartHomeStateMachineParser.IDENTIFIER, 0)
 
         def getRuleIndex(self):
             return SmartHomeStateMachineParser.RULE_deviceType
@@ -568,16 +509,10 @@ class SmartHomeStateMachineParser ( Parser ):
 
         localctx = SmartHomeStateMachineParser.DeviceTypeContext(self, self._ctx, self.state)
         self.enterRule(localctx, 8, self.RULE_deviceType)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 74
-            _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 4194302) != 0)):
-                self._errHandler.recoverInline(self)
-            else:
-                self._errHandler.reportMatch(self)
-                self.consume()
+            self.match(SmartHomeStateMachineParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -656,13 +591,13 @@ class SmartHomeStateMachineParser ( Parser ):
             self.state = 87
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==46 or _la==74:
+            if _la==7 or _la==35:
                 self.state = 79
                 self.action()
                 self.state = 84
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==51:
+                while _la==12:
                     self.state = 80
                     self.match(SmartHomeStateMachineParser.COMMA)
                     self.state = 81
@@ -889,13 +824,13 @@ class SmartHomeStateMachineParser ( Parser ):
                 self.state = 110
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if ((((_la - 52)) & ~0x3f) == 0 and ((1 << (_la - 52)) & 7864449) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & 64425566208) != 0):
                     self.state = 102
                     self.expression(0)
                     self.state = 107
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    while _la==51:
+                    while _la==12:
                         self.state = 103
                         self.match(SmartHomeStateMachineParser.COMMA)
                         self.state = 104
@@ -941,6 +876,8 @@ class SmartHomeStateMachineParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IDENTIFIER(self):
+            return self.getToken(SmartHomeStateMachineParser.IDENTIFIER, 0)
 
         def getRuleIndex(self):
             return SmartHomeStateMachineParser.RULE_actionMethod
@@ -966,16 +903,10 @@ class SmartHomeStateMachineParser ( Parser ):
 
         localctx = SmartHomeStateMachineParser.ActionMethodContext(self, self._ctx, self.state)
         self.enterRule(localctx, 18, self.RULE_actionMethod)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 122
-            _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 17175674880) != 0)):
-                self._errHandler.recoverInline(self)
-            else:
-                self._errHandler.reportMatch(self)
-                self.consume()
+            self.match(SmartHomeStateMachineParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -992,6 +923,8 @@ class SmartHomeStateMachineParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IDENTIFIER(self):
+            return self.getToken(SmartHomeStateMachineParser.IDENTIFIER, 0)
 
         def getRuleIndex(self):
             return SmartHomeStateMachineParser.RULE_getterMethod
@@ -1017,16 +950,10 @@ class SmartHomeStateMachineParser ( Parser ):
 
         localctx = SmartHomeStateMachineParser.GetterMethodContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_getterMethod)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 124
-            _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1082331758592) != 0)):
-                self._errHandler.recoverInline(self)
-            else:
-                self._errHandler.reportMatch(self)
-                self.consume()
+            self.match(SmartHomeStateMachineParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1317,11 +1244,11 @@ class SmartHomeStateMachineParser ( Parser ):
             self.state = 142
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [74]:
+            if token in [35]:
                 self.state = 140
                 self.stateName()
                 pass
-            elif token in [68]:
+            elif token in [29]:
                 self.state = 141
                 self.allStates()
                 pass
@@ -1683,7 +1610,7 @@ class SmartHomeStateMachineParser ( Parser ):
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 180
                     _la = self._input.LA(1)
-                    if not(((((_la - 60)) & ~0x3f) == 0 and ((1 << (_la - 60)) & 63) != 0)):
+                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 132120576) != 0)):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -1772,7 +1699,7 @@ class SmartHomeStateMachineParser ( Parser ):
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 191
                     _la = self._input.LA(1)
-                    if not(_la==66 or _la==67):
+                    if not(_la==27 or _la==28):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -1864,7 +1791,7 @@ class SmartHomeStateMachineParser ( Parser ):
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 202
                     _la = self._input.LA(1)
-                    if not(((((_la - 68)) & ~0x3f) == 0 and ((1 << (_la - 68)) & 7) != 0)):
+                    if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 3758096384) != 0)):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -2085,13 +2012,13 @@ class SmartHomeStateMachineParser ( Parser ):
             self.state = 234
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 52)) & ~0x3f) == 0 and ((1 << (_la - 52)) & 7864449) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 64425566208) != 0):
                 self.state = 226
                 self.expression(0)
                 self.state = 231
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==51:
+                while _la==12:
                     self.state = 227
                     self.match(SmartHomeStateMachineParser.COMMA)
                     self.state = 228
