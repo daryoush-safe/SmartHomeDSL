@@ -146,6 +146,8 @@ class CustomListener(SmartHomeStateMachineListener):
         self.devices_lookup = {}
         # declared states
         self.states_lookup = ['*']
+        # declared pins
+        self.pins_lookup = []
 
         # list of analog pins for analog devices
         self.analog_pins = [
@@ -177,10 +179,17 @@ class CustomListener(SmartHomeStateMachineListener):
         device_name = ctx.getChild(1).getText()
         device_type = ctx.getChild(3).getText()
 
+        if device_name in self.devices_lookup:
+            raise ValueError(f"Device {device_name} is already declared.")
+
         declared_pins = []
         for i in range(4, ctx.getChildCount()):
             child = ctx.getChild(i)
+            if child.getText() in self.pins_lookup:
+                raise ValueError(f"Pin {child.getText()} is already assigned.")
+
             if hasattr(child, 'getText') and child.getText().isdigit():
+                self.pins_lookup.append(child.getText())
                 declared_pins.append(child.getText())
 
         if device_type not in self.devices:
