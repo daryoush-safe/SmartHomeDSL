@@ -46,7 +46,7 @@ def main(args):
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('-i', '--input', help='Input DSL source', default='test7.txt')
+    argparser.add_argument('-i', '--input', help='Input DSL source', default='./test/test7.txt')
     argparser.add_argument('-o', '--output', help='Output Arduino file', default='SmartHome.ino')
     args = argparser.parse_args()
     main(args)

@@ -26,7 +26,7 @@ float readDistance(int TRIG_PIN, int ECHO_PIN) {
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
 
-  // Send 10 Âµs pulse
+  // Send 10 µs pulse
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
