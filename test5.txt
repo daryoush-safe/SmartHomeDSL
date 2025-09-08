@@ -9,7 +9,11 @@ state good {
   myServo.moveServo(120)
 }
 
-transition idle -> good when humSensor.getHumidity() >= 30;
-transition good -> idle when humSensor.getHumidity() < 30;
+state new{
+  myServo.sweepServo(46,120,1,20)
+}
+
+transition new -> idle when humSensor.getHumidity() < 30;
+transition idle -> new when humSensor.getHumidity() >50;
 
 
