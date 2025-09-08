@@ -42,12 +42,7 @@ class CustomListener(SmartHomeStateMachineListener):
             },
             "BUTTON": {
                 "device_type": "digital",
-                "getter_methods": ["isPressed", "read"],
-                "action_methods": [],
-            },
-            "SENSOR": {
-                "device_type": "analog",
-                "getter_methods": ["read"],
+                "getter_methods": ["isPressed"],
                 "action_methods": [],
             },
             "RELAY": {
@@ -63,36 +58,36 @@ class CustomListener(SmartHomeStateMachineListener):
             "LCD": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["display", "set"],
+                "action_methods": ["display", "clear"],
             },
             "BUZZER": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["on", "off", "beep"],
+                "action_methods": ["off", "beep"],
             },
             "TEMPERATURE_SENSOR": {
                 "device_type": "analog",
-                "getter_methods": ["getTemperature", "read"],
+                "getter_methods": ["getTemperature"],
                 "action_methods": [],
             },
             "HUMIDITY_SENSOR": {
                 "device_type": "analog",
-                "getter_methods": ["getHumidity", "read"],
+                "getter_methods": ["getHumidity"],
                 "action_methods": [],
             },
             "MOTION_SENSOR": {
                 "device_type": "digital",
-                "getter_methods": ["isMotionDetected", "read"],
+                "getter_methods": ["isMotionDetected"],
                 "action_methods": [],
             },
             "LIGHT_SENSOR": {
                 "device_type": "analog",
-                "getter_methods": ["read", "getLight"],
+                "getter_methods": ["getLight"],
                 "action_methods": [],
             },
             "ULTRASONIC_SENSOR": {
                 "device_type": "digital",
-                "getter_methods": ["getDistance", "read"],
+                "getter_methods": ["getDistance"],
                 "action_methods": [],
             },
             "RGB_LED": {
@@ -105,40 +100,10 @@ class CustomListener(SmartHomeStateMachineListener):
                 "getter_methods": [],
                 "action_methods": ["move", "set"],
             },
-            "PWM_OUTPUT": {
-                "device_type": "digital",
-                "getter_methods": [],
-                "action_methods": ["write", "set"],
-            },
-            "DIGITAL_INPUT": {
-                "device_type": "digital",
-                "getter_methods": ["read"],
-                "action_methods": [],
-            },
-            "DIGITAL_OUTPUT": {
-                "device_type": "digital",
-                "getter_methods": [],
-                "action_methods": ["write", "on", "off", "toggle"],
-            },
-            "ANALOG_INPUT": {
-                "device_type": "analog",
-                "getter_methods": ["read"],
-                "action_methods": [],
-            },
-            "ANALOG_OUTPUT": {
-                "device_type": "analog",
-                "getter_methods": [],
-                "action_methods": ["write"],
-            },
             "POTENTIOMETER": {
                 "device_type": "analog",
-                "getter_methods": ["read"],
+                "getter_methods": ["getResistance"],
                 "action_methods": [],
-            },
-            "DISPLAY": {
-                "device_type": "digital",
-                "getter_methods": [],
-                "action_methods": ["display", "set"],
             },
         }
 
