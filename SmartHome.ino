@@ -15,6 +15,12 @@ float readTemperature(int pin) {
   Serial.println(value);
   return value;
 }
+float readPotentiometer(int pin){
+    int value = analogRead(Pin);
+    Serial.print("Potentiometer Value: ");
+    Serial.println(value);
+    return value;
+}
 float readHumidity(DHT &sensor) {
   float h = sensor.readHumidity();
   if (isnan(h)) {
@@ -75,6 +81,7 @@ Serial.println("Starting Program ...");
 Serial.begin(9600);
 pinMode(13, OUTPUT);
 pinMode(A0, INPUT);
+humSensor.begin(); // Initialize DHT11 sensor
 pinMode(2, OUTPUT);
 pinMode(3, INPUT);
 pinMode(4, INPUT);
