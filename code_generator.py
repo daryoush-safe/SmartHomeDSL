@@ -201,7 +201,7 @@ class CodeGenerator:
             elif dev_type == "SERVO":
                 if "#include <Servo.h>" not in includes:
                     includes.append("#include <Servo.h>")
-                servo_setup.append(f"{name}.attach({pin[0]});")
+                servo_setup.append(f"{name}.attach({pin[0]},1000,2000);")
                 helpers.append(f"Servo {name};")
             elif dev_type == "LCD":
                 if "#include <LiquidCrystal.h>" not in includes:
