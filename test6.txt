@@ -1,0 +1,13 @@
+device myLed : LED pin 9;
+device myButton : BUTTON pin 8;
+
+state pressed {
+  myLed.on()
+}
+
+state not_pressed {
+  myLed.off()
+}
+
+transition pressed -> not_pressed when myButton.isPressed()==0;
+transition not_pressed -> pressed when myButton.isPressed()==1;
