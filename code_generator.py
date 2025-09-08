@@ -34,14 +34,14 @@ class CodeGenerator:
         # Example: device mainLED : LED pin 13;
         name = node.children[0].value
         dev_type = node.children[1].value
-        pinList = []
+        pin_list = []
         if len(node.children) > 2:
             for i in range(2, len(node.children)):
-                if int(node.children[i].value) <= 13:
-                    pinList.append(node.children[i].value)
+                if int() <= 13:
+                    pin_list.append(node.children[i].value)
                 else:
-                    pinList.append(f"A{int(node.children[i].value) - 14}")
-        self.devices[name] = (dev_type, pinList)
+                    pin_list.append(f"A{int(node.children[i].value) - 14}")
+        self.devices[name] = (dev_type, pin_list)
 
     def _handle_state(self, node):
         state_name = node.children[0].value
@@ -68,7 +68,6 @@ class CodeGenerator:
         action = node.children[1].value
         args = [c.value for c in node.children[2:]]
         dev_type, pin = self.devices[dev]
-
 
         # LED / DIGITAL_OUTPUT
         if dev_type in ["LED", "DIGITAL_OUTPUT"]:
@@ -127,7 +126,8 @@ class CodeGenerator:
     # --------------------------
     # Delay
     # --------------------------
-    def _translate_delay_action(self, node):
+    @staticmethod
+    def _translate_delay_action(node):
         ms = node.children[0].value
         return f"delay({ms});"
 
@@ -170,10 +170,6 @@ class CodeGenerator:
             elif meth == 'readPotentiometer':
                 return f"readPotentiometer({pin[0]})"
 
-            raise ValueError(f"method {meth} is not define.")
-        else:
-            raise ValueError(f"device {dev} is not define.")
-
     # --------------------------
     # Code Assembly
     # --------------------------
@@ -197,8 +193,8 @@ class CodeGenerator:
                 if "#include <LiquidCrystal.h>" not in includes:
                     includes.append("#include <LiquidCrystal.h>")
                 helpers.append(f"LiquidCrystal {name}({pin[0]}, {pin[1]}, {pin[2]}, {pin[3]}, {pin[4]}, {pin[5]}); // Adjust pins")
-                setup_code.append(f"lcd.begin(16, 2);  // Initialize 16x2 LCD")
-            elif dev_type in ("TEMPERATURE_SENSOR", "LIGHT_SENSOR", "MOTION_SENSOR","POTENTIOMETER"):
+                setup_code.append(f"{name}.begin(16, 2);  // Initialize 16x2 LCD")
+            elif dev_type in ("TEMPERATURE_SENSOR", "LIGHT_SENSOR", "MOTION_SENSOR", "POTENTIOMETER"):
                 # out_code.append(f"const int {name} = {pin};")
                 setup_code.append(f"pinMode({pin[0]}, INPUT);")
             elif dev_type == "ULTRASONIC_SENSOR":
@@ -208,7 +204,8 @@ class CodeGenerator:
                 if "#include <DHT.h>" not in includes:
                     includes.append("#include <DHT.h>")
                 helpers.append(f"DHT {name}({pin[0]}, DHT11);")
-            elif dev_type in ("TEMPERATURE_SENSOR", "HUMIDITY_SENSOR", "LIGHT_SENSOR", "POTENTIOMETER", "ANALOG_INPUT"):
+                setup_code.append(f"{name}.begin(); // Initialize DHT11 sensor")
+            elif dev_type in ("TEMPERATURE_SENSOR", "POTENTIOMETER", "ANALOG_INPUT"):
                 setup_code.append(f"// {dev_type} on pin {pin}")
 
         # Add helper sensor functions
@@ -222,7 +219,7 @@ float readTemperature(int pin) {
   return value;
 }
 float readPotentiometer(int pin){
-    int value = analogRead(Pin);
+    int value = analogRead(pin);
     Serial.print("Potentiometer Value: ");
     Serial.println(value);
     return value;
@@ -334,6 +331,7 @@ void loop() {{
   delay(200);
 }}
 """
+
 
 # -------------------------------
 # CLI entrypoint
