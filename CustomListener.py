@@ -3,6 +3,7 @@ from gen.SmartHomeStateMachineParser import SmartHomeStateMachineParser
 from required_code_collection.astTree import AST
 from required_code_collection.make_ast_subtree import make_ast_subtree
 
+
 class CustomListener(SmartHomeStateMachineListener):
     def __init__(self):
         # Rules where we override default AST handling
@@ -37,107 +38,67 @@ class CustomListener(SmartHomeStateMachineListener):
             "LED": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["on", "off", "toggle", "blink", "fade", "setBrightness"],
+                "action_methods": ["on", "off", "toggle", "blink", "setBrightness"],
             },
             "BUTTON": {
                 "device_type": "digital",
-                "getter_methods": ["isPressed", "read"],
+                "getter_methods": ["isPressed"],
                 "action_methods": [],
-            },
-            "SENSOR": {
-                "device_type": "analog",
-                "getter_methods": ["read"],
-                "action_methods": [],
-            },
-            "RELAY": {
-                "device_type": "digital",
-                "getter_methods": [],
-                "action_methods": ["on", "off", "toggle"],
             },
             "SERVO": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["move", "set"],
+                "action_methods": ["moveServo","sweepServo"],
             },
             "LCD": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["display", "set"],
+                "action_methods": ["display"],
             },
             "BUZZER": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["on", "off", "beep"],
+                "action_methods": ["off", "beep"],
             },
             "TEMPERATURE_SENSOR": {
                 "device_type": "analog",
-                "getter_methods": ["getTemperature", "read"],
+                "getter_methods": ["getTemperature"],
                 "action_methods": [],
             },
             "HUMIDITY_SENSOR": {
                 "device_type": "analog",
-                "getter_methods": ["getHumidity", "read"],
+                "getter_methods": ["getHumidity"],
                 "action_methods": [],
             },
             "MOTION_SENSOR": {
                 "device_type": "digital",
-                "getter_methods": ["isMotionDetected", "read"],
+                "getter_methods": ["isMotionDetected"],
                 "action_methods": [],
             },
             "LIGHT_SENSOR": {
                 "device_type": "analog",
-                "getter_methods": ["read"],
+                "getter_methods": ["getLight"],
                 "action_methods": [],
             },
             "ULTRASONIC_SENSOR": {
                 "device_type": "digital",
-                "getter_methods": ["getDistance", "read"],
+                "getter_methods": ["getDistance"],
                 "action_methods": [],
             },
             "RGB_LED": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["setColor", "on", "off", "fade", "blink", "setBrightness"],
-            },
-            "STEPPER_MOTOR": {
-                "device_type": "digital",
-                "getter_methods": [],
-                "action_methods": ["move", "set"],
-            },
-            "PWM_OUTPUT": {
-                "device_type": "digital",
-                "getter_methods": [],
-                "action_methods": ["write", "set"],
-            },
-            "DIGITAL_INPUT": {
-                "device_type": "digital",
-                "getter_methods": ["read"],
-                "action_methods": [],
-            },
-            "DIGITAL_OUTPUT": {
-                "device_type": "digital",
-                "getter_methods": [],
-                "action_methods": ["write", "on", "off", "toggle"],
-            },
-            "ANALOG_INPUT": {
-                "device_type": "analog",
-                "getter_methods": ["read"],
-                "action_methods": [],
-            },
-            "ANALOG_OUTPUT": {
-                "device_type": "analog",
-                "getter_methods": [],
-                "action_methods": ["write"],
+                "action_methods": ["setColor"],
             },
             "POTENTIOMETER": {
                 "device_type": "analog",
-                "getter_methods": ["read"],
+                "getter_methods": ["readPotentiometer"],
                 "action_methods": [],
             },
             "DISPLAY": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["display", "set"],
+                "action_methods": ["display"],
             },
         }
 
@@ -145,6 +106,18 @@ class CustomListener(SmartHomeStateMachineListener):
         self.devices_lookup = {}
         # declared states
         self.states_lookup = ['*']
+        # declared pins
+        self.pins_lookup = []
+
+        # list of analog pins for analog devices
+        self.analog_pins = [
+            '14', '15', '16', '17', '18', '19',
+        ]
+        
+        # list of digital pins for digital devices
+        self.digital_pins = [
+            '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13',
+        ]
 
         self.rule_names = []
         self.ast = AST()
@@ -162,7 +135,45 @@ class CustomListener(SmartHomeStateMachineListener):
     def exitProgram(self, ctx):
         make_ast_subtree(self.ast, ctx, "program", keep_node=True)
 
-    def exitDeviceDeclaration(self, ctx:SmartHomeStateMachineParser.DeviceDeclarationContext):
+    def exitDeviceDeclaration(self, ctx: SmartHomeStateMachineParser.DeviceDeclarationContext):
+        device_name = ctx.getChild(1).getText()
+        device_type = ctx.getChild(3).getText()
+
+        if device_name in self.devices_lookup:
+            raise ValueError(f"Device {device_name} is already declared.")
+
+        declared_pins = []
+        for i in range(4, ctx.getChildCount()):
+            child = ctx.getChild(i)
+            if child.getText() in self.pins_lookup:
+                raise ValueError(f"Pin {child.getText()} is already assigned.")
+
+            if hasattr(child, 'getText') and child.getText().isdigit():
+                self.pins_lookup.append(child.getText())
+                declared_pins.append(child.getText())
+
+        if device_type not in self.devices:
+            raise ValueError(f"Error: Device type '{device_type}' is not supported. "
+                             f"Supported devices: {list(self.devices.keys())}")
+
+        device_config = self.devices[device_type]
+        device_pin_type = device_config["device_type"]
+
+        if declared_pins:
+            if device_pin_type == "analog":
+                invalid_pins = [pin for pin in declared_pins if pin not in self.analog_pins]
+                if invalid_pins:
+                    raise ValueError(f"Error: Device '{device_name}' of type '{device_type}' is analog "
+                                     f"but has invalid analog pins: {invalid_pins}. "
+                                     f"Valid analog pins: {self.analog_pins}")
+
+            elif device_pin_type == "digital":
+                invalid_pins = [pin for pin in declared_pins if pin not in self.digital_pins]
+                if invalid_pins:
+                    raise ValueError(f"Error: Device '{device_name}' of type '{device_type}' is digital "
+                                     f"but has invalid digital pins: {invalid_pins}. "
+                                     f"Valid digital pins: {self.digital_pins}")
+
         make_ast_subtree(self.ast, ctx, "device_dec", keep_node=True)
         self.devices_lookup[ctx.getChild(1).getText()] = ctx.getChild(3).getText()
 

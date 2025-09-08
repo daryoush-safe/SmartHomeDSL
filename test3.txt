@@ -1,0 +1,28 @@
+device mainLED : LED pin 13;
+// device buzzer1 : BUZZER pin 8;
+device tempSensor : TEMPERATURE_SENSOR pin 14;
+device lightSensor : LIGHT_SENSOR pin 15;
+device ultSensor : ULTRASONIC_SENSOR pin 2 , pin 3;
+device motionSensor : MOTION_SENSOR pin 4;
+device lcd : LCD pin 12, pin 11, pin 10, pin 9, pin 8, pin 7;
+
+state idle {
+    mainLED.off()
+}
+
+state alert {
+    mainLED.blink(500)
+    // buzzer1.beep(500)
+}
+
+state comfortable {
+    mainLED.on(),
+    lcd.display(comfortable)
+}
+
+transition idle -> alert when tempSensor.getTemperature() * 3 > 15;
+transition idle -> alert when ultSensor.getDistance() > 15;
+transition idle -> comfortable when lightSensor.getLight() >= 100;
+transition alert -> idle when motionSensor.isMotionDetected() && tempSensor.getTemperature() < 3;
+
+

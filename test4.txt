@@ -1,0 +1,22 @@
+device mainLED : LED pin 13;
+device tempSensor : TEMPERATURE_SENSOR pin 14;
+device humSensor : HUMIDITY_SENSOR pin 15;
+device ultSensor : ULTRASONIC_SENSOR pin 2 , pin 3;
+device motionSensor : MOTION_SENSOR pin 4;
+
+state idle {
+    mainLED.off()
+}
+
+state alert {
+    mainLED.blink(500)
+}
+
+state comfortable {
+    mainLED.on(),
+}
+
+transition idle -> comfortable when humSensor.getHumidity() >= 30;
+transition alert -> idle when motionSensor.isMotionDetected() && tempSensor.getTemperature() < 3;
+
+
