@@ -1,0 +1,15 @@
+device myServo : SERVO pin 9;
+device humSensor : HUMIDITY_SENSOR pin 14;
+
+state idle {
+  myServo.moveServo(20)
+}
+
+state good {
+  myServo.moveServo(120)
+}
+
+transition idle -> good when humSensor.getHumidity() >= 30;
+transition good -> idle when humSensor.getHumidity() < 30;
+
+

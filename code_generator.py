@@ -96,9 +96,9 @@ class CodeGenerator:
 
         # SERVO
         if dev_type == "SERVO":
-            if action == "move":
+            if action == "moveServo":
                 angle = args[0] if args else "90"
-                return f"{dev}.write({angle});"
+                return f"moveServo({dev}, {angle});"
             return f"// Servo needs Servo.h attached and servo.attach({pin});"
 
         # LCD / DISPLAY
@@ -186,8 +186,9 @@ class CodeGenerator:
             elif dev_type in ("BUTTON", "MOTION_SENSOR", "DIGITAL_INPUT"):
                 setup_code.append(f"pinMode({pin[0]}, INPUT);")
             elif dev_type == "SERVO":
-                includes.append("#include <Servo.h>")
-                servo_setup.append(f"{name}.attach({pin});")
+                if "#include <Servo.h>" not in includes:
+                    includes.append("#include <Servo.h>")
+                servo_setup.append(f"{name}.attach({pin[0]});")
                 helpers.append(f"Servo {name};")
             elif dev_type == "LCD":
                 if "#include <LiquidCrystal.h>" not in includes:
@@ -234,6 +235,11 @@ float readHumidity(DHT &sensor) {
   Serial.print(h);
   Serial.println(" %");
   return h;
+}
+void moveServo(Servo &servo, int angle) {
+  if (angle < 0) angle = 0;
+  if (angle > 180) angle = 180;
+  servo.write(angle);
 }
 float readUltrasonic(int pin) {
   // Placeholder ultrasonic sensor logic

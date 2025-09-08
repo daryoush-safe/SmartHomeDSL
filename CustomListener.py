@@ -58,7 +58,7 @@ class CustomListener(SmartHomeStateMachineListener):
             "SERVO": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["move", "set"],
+                "action_methods": ["moveServo"],
             },
             "LCD": {
                 "device_type": "digital",
