@@ -99,6 +99,12 @@ class CodeGenerator:
             if action == "moveServo":
                 angle = args[0] if args else "90"
                 return f"moveServo({dev}, {angle});"
+            if action == "sweepServo":
+                start_angle = args[0] if len(args) > 0 else "0"
+                end_angle   = args[1] if len(args) > 1 else "180"
+                step        = args[2] if len(args) > 2 else "1"
+                delay_ms    = args[3] if len(args) > 3 else "15"
+                return f"sweepServo({dev},{start_angle},{end_angle},{step},{delay_ms});"
             return f"// Servo needs Servo.h attached and servo.attach({pin});"
 
         # LCD / DISPLAY
@@ -240,6 +246,12 @@ void moveServo(Servo &servo, int angle) {
   if (angle < 0) angle = 0;
   if (angle > 180) angle = 180;
   servo.write(angle);
+}
+void sweepServo(Servo &servo,int start_angle,int end_angle,int step,int delay_ms){
+    for(int pos = start_angle; pos <= end_angle; pos += step){
+        servo.write(pos);
+        delay(delay);
+    }
 }
 float readUltrasonic(int pin) {
   // Placeholder ultrasonic sensor logic
