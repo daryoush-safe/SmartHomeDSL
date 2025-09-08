@@ -98,10 +98,6 @@ class CodeGenerator:
         if dev_type in ["BUTTON"]:
             return f"// {dev} actions handled via getters"
 
-        # RELAY
-        if dev_type == "RELAY":
-            return f"digitalWrite({pin[0]}, {'HIGH' if action == 'on' else 'LOW'});"
-
         # SERVO
         if dev_type == "SERVO":
             if action == "moveServo":
