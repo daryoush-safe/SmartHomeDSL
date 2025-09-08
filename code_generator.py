@@ -167,6 +167,8 @@ class CodeGenerator:
                 return f"readMotion({pin[0]})"
             elif meth == 'getHumidity':
                 return f"readHumidity({dev})"
+            elif meth == 'readPotentiometer':
+                return f"readPotentiometer({pin[0]})"
 
             raise ValueError(f"method {meth} is not define.")
         else:
@@ -196,7 +198,7 @@ class CodeGenerator:
                     includes.append("#include <LiquidCrystal.h>")
                 helpers.append(f"LiquidCrystal {name}({pin[0]}, {pin[1]}, {pin[2]}, {pin[3]}, {pin[4]}, {pin[5]}); // Adjust pins")
                 setup_code.append(f"lcd.begin(16, 2);  // Initialize 16x2 LCD")
-            elif dev_type in ("TEMPERATURE_SENSOR", "LIGHT_SENSOR", "MOTION_SENSOR"):
+            elif dev_type in ("TEMPERATURE_SENSOR", "LIGHT_SENSOR", "MOTION_SENSOR","POTENTIOMETER"):
                 # out_code.append(f"const int {name} = {pin};")
                 setup_code.append(f"pinMode({pin[0]}, INPUT);")
             elif dev_type == "ULTRASONIC_SENSOR":
@@ -218,6 +220,12 @@ float readTemperature(int pin) {
   Serial.print("temperature: ");
   Serial.println(value);
   return value;
+}
+float readPotentiometer(int pin){
+    int value = analogRead(Pin);
+    Serial.print("Potentiometer Value: ");
+    Serial.println(value);
+    return value;
 }
 float readHumidity(DHT &sensor) {
   float h = sensor.readHumidity();

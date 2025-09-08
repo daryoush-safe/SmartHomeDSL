@@ -132,7 +132,7 @@ class CustomListener(SmartHomeStateMachineListener):
             },
             "POTENTIOMETER": {
                 "device_type": "analog",
-                "getter_methods": ["read"],
+                "getter_methods": ["readPotentiometer"],
                 "action_methods": [],
             },
             "DISPLAY": {
