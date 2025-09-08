@@ -175,6 +175,8 @@ class CodeGenerator:
                 return f"readHumidity({dev})"
             elif meth == 'readPotentiometer':
                 return f"readPotentiometer({pin[0]})"
+            elif meth == 'isPressed':
+                return f"isPressed({pin[0]})"
 
     # --------------------------
     # Code Assembly
@@ -189,8 +191,10 @@ class CodeGenerator:
         for name, (dev_type, pin) in self.devices.items():
             if dev_type in ("LED", "RELAY", "BUZZER", "DIGITAL_OUTPUT"):
                 setup_code.append(f"pinMode({pin[0]}, OUTPUT);")
-            elif dev_type in ("BUTTON", "MOTION_SENSOR", "DIGITAL_INPUT"):
+            elif dev_type in ("MOTION_SENSOR", "DIGITAL_INPUT"):
                 setup_code.append(f"pinMode({pin[0]}, INPUT);")
+            elif dev_type == "BUTTON":
+                setup_code.append(f"pinMode({pin[0]}, INPUT_PULLUP);")
             elif dev_type == "SERVO":
                 if "#include <Servo.h>" not in includes:
                     includes.append("#include <Servo.h>")
@@ -212,7 +216,7 @@ class CodeGenerator:
                     includes.append("#include <DHT.h>")
                 helpers.append(f"DHT {name}({pin[0]}, DHT11);")
                 setup_code.append(f"{name}.begin(); // Initialize DHT11 sensor")
-            elif dev_type in ("TEMPERATURE_SENSOR", "POTENTIOMETER", "ANALOG_INPUT"):
+            elif dev_type in ("TEMPERATURE_SENSOR", "POTENTIOMETER", "ANALOG_INPUT","BUTTON"):
                 setup_code.append(f"// {dev_type} on pin {pin}")
 
         # Add helper sensor functions
@@ -252,6 +256,13 @@ void sweepServo(Servo &servo,int start_angle,int end_angle,int step,int delay_ms
         servo.write(pos);
         delay(delay);
     }
+}
+bool isPressed(int pin) {
+  if (digitalRead(pin) == LOW) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 float readUltrasonic(int pin) {
   // Placeholder ultrasonic sensor logic

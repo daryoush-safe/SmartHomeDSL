@@ -42,7 +42,7 @@ class CustomListener(SmartHomeStateMachineListener):
             },
             "BUTTON": {
                 "device_type": "digital",
-                "getter_methods": ["isPressed", "read"],
+                "getter_methods": ["isPressed"],
                 "action_methods": [],
             },
             "SENSOR": {
