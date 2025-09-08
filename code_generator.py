@@ -69,8 +69,8 @@ class CodeGenerator:
         args = [c.value for c in node.children[2:]]
         dev_type, pin = self.devices[dev]
 
-        # LED / DIGITAL_OUTPUT
-        if dev_type in ["LED", "DIGITAL_OUTPUT"]:
+        # LED
+        if dev_type in ["LED"]:
             if action == "on":
                 return f"digitalWrite({pin[0]}, HIGH);"
             elif action == "off":
@@ -80,14 +80,22 @@ class CodeGenerator:
             elif action == "blink":
                 delay_ms = args[0] if args else "500"
                 return f"digitalWrite({pin[0]}, !digitalRead({pin[0]})); delay({delay_ms});"
+            elif action == "setBrightness":
+                light = int(args[0]) if args else 255
+                if light > 100 :
+                    light = 100
+                elif light < 0:
+                    light = 0
+                light = round((light / 100) * 255)
+                return f"analogWrite({pin[0]}, {light});"
 
         if dev_type == "RGB_LED":
             if action == "setColor":
                 r, g, b = args if len(args) == 3 else ("255", "255", "255")
-                return f"analogWrite({pin[0]}, {r}); // Simplified RGB (expand for multiple pins)"
+                return f"analogWrite({pin[0]}, {r});\n  analogWrite({pin[1]}, {g});\n  analogWrite({pin[2]}, {b});"
 
-        # BUTTON / DIGITAL_INPUT
-        if dev_type in ["BUTTON", "DIGITAL_INPUT"]:
+        # BUTTON
+        if dev_type in ["BUTTON"]:
             return f"// {dev} actions handled via getters"
 
         # RELAY
@@ -121,13 +129,6 @@ class CodeGenerator:
             elif action == "off":
                 return f"noTone({pin[0]});"
 
-        # PWM_OUTPUT / ANALOG_OUTPUT
-        if dev_type in ["PWM_OUTPUT", "ANALOG_OUTPUT"]:
-            if action in ["write", "setBrightness", "fade"]:
-                val = args[0] if args else "128"
-                return f"analogWrite({pin[0]}, {val});"
-
-        return f"// Unknown device action {dev}.{action}"
 
     # --------------------------
     # Delay
