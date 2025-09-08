@@ -187,8 +187,11 @@ class CodeGenerator:
         servo_setup = []
         includes = []
         helpers = []
+        used_devices = set()
 
         for name, (dev_type, pin) in self.devices.items():
+            used_devices.add(dev_type)
+
             if dev_type in ("LED", "RELAY", "BUZZER", "DIGITAL_OUTPUT"):
                 setup_code.append(f"pinMode({pin[0]}, OUTPUT);")
             elif dev_type in ("MOTION_SENSOR", "DIGITAL_INPUT"):
@@ -220,21 +223,30 @@ class CodeGenerator:
                 setup_code.append(f"// {dev_type} on pin {pin}")
 
         # Add helper sensor functions
-        helpers.append("""
+        helper_functions = []
+
+        if "TEMPERATURE_SENSOR" in used_devices:
+            helper_functions.append("""
 float readTemperature(int pin) {
   int v = analogRead(pin);
   float voltage = v * (5.0 / 1023.0);
-  float value =  voltage * 100.0; // LM35
+  float value = voltage * 100.0; // LM35
   Serial.print("temperature: ");
   Serial.println(value);
   return value;
-}
-float readPotentiometer(int pin){
-    int value = analogRead(pin);
-    Serial.print("Potentiometer Value: ");
-    Serial.println(value);
-    return value;
-}
+}""")
+
+        if "POTENTIOMETER" in used_devices:
+            helper_functions.append("""
+float readPotentiometer(int pin) {
+  int value = analogRead(pin);
+  Serial.print("Potentiometer Value: ");
+  Serial.println(value);
+  return value;
+}""")
+
+        if "HUMIDITY_SENSOR" in used_devices:
+            helper_functions.append("""
 float readHumidity(DHT &sensor) {
   float h = sensor.readHumidity();
   if (isnan(h)) {
@@ -245,35 +257,44 @@ float readHumidity(DHT &sensor) {
   Serial.print(h);
   Serial.println(" %");
   return h;
-}
+}""")
+
+        if "SERVO" in used_devices:
+            helper_functions.append("""
 void moveServo(Servo &servo, int angle) {
   if (angle < 0) angle = 0;
   if (angle > 180) angle = 180;
   servo.write(angle);
 }
-void sweepServo(Servo &servo,int start_angle,int end_angle,int step,int delay_ms){
-    for(int pos = start_angle; pos <= end_angle; pos += step){
-        servo.write(pos);
-        delay(delay);
-    }
-}
+
+void sweepServo(Servo &servo, int start_angle, int end_angle, int step, int delay_ms) {
+  for(int pos = start_angle; pos <= end_angle; pos += step) {
+    servo.write(pos);
+    delay(delay_ms);
+  }
+}""")
+
+        if "BUTTON" in used_devices:
+            helper_functions.append("""
 bool isPressed(int pin) {
   if (digitalRead(pin) == LOW) {
-    return 1;
+    return true;
   } else {
-    return 0;
+    return false;
   }
-}
-float readUltrasonic(int pin) {
-  // Placeholder ultrasonic sensor logic
-  return analogRead(pin);
-}
+}""")
+
+        if "LIGHT_SENSOR" in used_devices:
+            helper_functions.append("""
 float readLight(int pin) {
   int value = analogRead(pin);
   Serial.print("light: ");
   Serial.println(value);
   return value; // 0 (dark) to 1023 (bright)
-}
+}""")
+
+        if "ULTRASONIC_SENSOR" in used_devices:
+            helper_functions.append("""
 float readDistance(int TRIG_PIN, int ECHO_PIN) {
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
@@ -294,18 +315,24 @@ float readDistance(int TRIG_PIN, int ECHO_PIN) {
   Serial.print(distance);
   Serial.println(" cm");
   return distance;
-}
+}""")
+
+        if "MOTION_SENSOR" in used_devices:
+            helper_functions.append("""
 bool readMotion(int pirPin) {
-  int motion = digitalRead(pirPin);
-  if (motion == HIGH) {
-    Serial.println("Motion Detected!");
-    return true;
-  } else {
-    Serial.println("No Motion");
-    return false;
-  }
+int motion = digitalRead(pirPin);
+if (motion == HIGH) {
+Serial.println("Motion Detected!");
+return true;
+} else {
+Serial.println("No Motion");
+return false;
 }
-""")
+}""")
+
+        # Add all used helper functions to helpers list
+        if helper_functions:
+            helpers.append('\n'.join(helper_functions))
 
         states_code = []
         for state, actions in self.states.items():

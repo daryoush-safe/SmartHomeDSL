@@ -5,22 +5,17 @@
 enum State { IDLE, ALERT, COMFORTABLE };
 State currentState = IDLE;
 
-DHT humSensor(A1, DHT11);
+DHT humSensor(15, DHT11);
 
 float readTemperature(int pin) {
   int v = analogRead(pin);
   float voltage = v * (5.0 / 1023.0);
-  float value =  voltage * 100.0; // LM35
+  float value = voltage * 100.0; // LM35
   Serial.print("temperature: ");
   Serial.println(value);
   return value;
 }
-float readPotentiometer(int pin){
-    int value = analogRead(Pin);
-    Serial.print("Potentiometer Value: ");
-    Serial.println(value);
-    return value;
-}
+
 float readHumidity(DHT &sensor) {
   float h = sensor.readHumidity();
   if (isnan(h)) {
@@ -32,16 +27,7 @@ float readHumidity(DHT &sensor) {
   Serial.println(" %");
   return h;
 }
-float readUltrasonic(int pin) {
-  // Placeholder ultrasonic sensor logic
-  return analogRead(pin);
-}
-float readLight(int pin) {
-  int value = analogRead(pin);
-  Serial.print("light: ");
-  Serial.println(value);
-  return value; // 0 (dark) to 1023 (bright)
-}
+
 float readDistance(int TRIG_PIN, int ECHO_PIN) {
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
@@ -63,24 +49,24 @@ float readDistance(int TRIG_PIN, int ECHO_PIN) {
   Serial.println(" cm");
   return distance;
 }
-bool readMotion(int pirPin) {
-  int motion = digitalRead(pirPin);
-  if (motion == HIGH) {
-    Serial.println("Motion Detected!");
-    return true;
-  } else {
-    Serial.println("No Motion");
-    return false;
-  }
-}
 
+bool readMotion(int pirPin) {
+int motion = digitalRead(pirPin);
+if (motion == HIGH) {
+Serial.println("Motion Detected!");
+return true;
+} else {
+Serial.println("No Motion");
+return false;
+}
+}
 
 
 void setup() {
 Serial.println("Starting Program ...");
 Serial.begin(9600);
 pinMode(13, OUTPUT);
-pinMode(A0, INPUT);
+pinMode(14, INPUT);
 humSensor.begin(); // Initialize DHT11 sensor
 pinMode(2, OUTPUT);
 pinMode(3, INPUT);
@@ -104,7 +90,7 @@ void checkTransitions() {
       if (readHumidity(humSensor) >= 30) currentState = COMFORTABLE;
       break;
     case ALERT:
-      if (readMotion(4) &&readTemperature(A0) < 3) currentState = IDLE;
+      if (readMotion(4) &&readTemperature(14) < 3) currentState = IDLE;
       break;
   }
 }
