@@ -37,7 +37,7 @@ class CodeGenerator:
         pin_list = []
         if len(node.children) > 2:
             for i in range(2, len(node.children)):
-                if int() <= 13:
+                if int(node.children[i].value) <= 13:
                     pin_list.append(node.children[i].value)
                 else:
                     pin_list.append(f"A{int(node.children[i].value) - 14}")
