@@ -34,71 +34,176 @@ class CustomListener(SmartHomeStateMachineListener):
             'deviceDeclaration',
         ]
         # all possible devices
+
         self.devices = {
             "LED": {
                 "device_type": "digital",
                 "getter_methods": [],
                 "action_methods": ["on", "off", "toggle", "blink", "setBrightness"],
+                "expected_pins": 1,
+                "method_args": {
+                    "on": {"count": 0},
+                    "off": {"count": 0},
+                    "toggle": {"count": 0},
+                    "blink": {
+                        "count": 1,
+                        "args": [
+                            {"type": "int", "range": [1, 1000]},
+                        ]
+                    },
+                    "setBrightness": {
+                        "count": 1,
+                        "args": [
+                            {"type": "int", "range": [0, 255]},
+                        ],
+                    },
+                },
             },
             "BUTTON": {
                 "device_type": "digital",
                 "getter_methods": ["isPressed"],
                 "action_methods": [],
+                "expected_pins": 1,
+                "method_args": {
+                    "isPressed": {"count": 0},
+                },
             },
             "SERVO": {
                 "device_type": "digital",
                 "getter_methods": [],
-                "action_methods": ["moveServo","sweepServo"],
+                "action_methods": ["moveServo", "sweepServo"],
+                "expected_pins": 1,
+                "method_args": {
+                    "moveServo": {
+                        "count": 1,
+                        "args": [
+                            {"type": "int", "range": [0, 180]},
+                        ],
+                    },
+                    "sweepServo": {
+                        "count": 4,
+                        "args": [
+                            {"type": "int", "range": [0, 180]},   # start_andle
+                            {"type": "int", "range": [0, 180]},   # end_angle
+                            {"type": "int", "range": [1, 180]},   # step
+                            {"type": "int", "range": [1, 1000]},  # delay_ms
+                        ],
+                    },
+                },
             },
+            # TODO
             "LCD": {
                 "device_type": "digital",
                 "getter_methods": [],
                 "action_methods": ["display"],
+                "expected_pins": 6,
+                "method_args": {
+                    "display": {
+                        "count": 1,
+                        "args": [
+                            {"type": "string"},
+                        ],
+                    },
+                },
             },
             "BUZZER": {
                 "device_type": "digital",
                 "getter_methods": [],
                 "action_methods": ["off", "beep"],
+                "expected_pins": 1,
+                "method_args": {
+                    "off": {"count": 0},
+                    "beep": {
+                        "count": 1,
+                        "args": [
+                            {"type": "int", "range": [1, 1000]},
+                        ],
+                    },
+                },
             },
             "TEMPERATURE_SENSOR": {
                 "device_type": "analog",
                 "getter_methods": ["getTemperature"],
                 "action_methods": [],
+                "expected_pins": 1,
+                "method_args": {
+                    "getTemperature": {"count": 0},
+                },
             },
             "HUMIDITY_SENSOR": {
                 "device_type": "analog",
                 "getter_methods": ["getHumidity"],
                 "action_methods": [],
+                "expected_pins": 1,
+                "method_args": {
+                    "getHumidity": {"count": 0},
+                },
             },
             "MOTION_SENSOR": {
                 "device_type": "digital",
                 "getter_methods": ["isMotionDetected"],
                 "action_methods": [],
+                "expected_pins": 1,
+                "method_args": {
+                    "isMotionDetected": {"count": 0},
+                },
             },
             "LIGHT_SENSOR": {
                 "device_type": "analog",
                 "getter_methods": ["getLight"],
                 "action_methods": [],
+                "expected_pins": 1,
+                "method_args": {
+                    "getLight": {"count": 0},
+                },
             },
             "ULTRASONIC_SENSOR": {
                 "device_type": "digital",
                 "getter_methods": ["getDistance"],
                 "action_methods": [],
+                "expected_pins": 2,
+                "method_args": {
+                    "getDistance": {"count": 0},
+                },
             },
             "RGB_LED": {
                 "device_type": "digital",
                 "getter_methods": [],
                 "action_methods": ["setColor"],
+                "expected_pins": 3,
+                "method_args": {
+                    "setColor": {
+                        "count": 3,
+                        "args": [
+                            {"type": "int", "range": [0, 255]},
+                            {"type": "int", "range": [0, 255]},
+                            {"type": "int", "range": [0, 255]},
+                        ],
+                    },
+                },
             },
             "POTENTIOMETER": {
                 "device_type": "analog",
                 "getter_methods": ["readPotentiometer"],
                 "action_methods": [],
+                "expected_pins": 1,
+                "method_args": {
+                    "readPotentiometer": {"count": 0},
+                },
             },
             "DISPLAY": {
                 "device_type": "digital",
                 "getter_methods": [],
                 "action_methods": ["display"],
+                "expected_pins": 6,
+                "method_args": {
+                    "display": {
+                        "count": 1,
+                        "args": [
+                            {"type": "string"},
+                        ],
+                    },
+                },
             },
         }
 
@@ -142,19 +247,24 @@ class CustomListener(SmartHomeStateMachineListener):
         if device_name in self.devices_lookup:
             raise ValueError(f"Device {device_name} is already declared.")
 
-        declared_pins = []
-        for i in range(4, ctx.getChildCount()):
-            child = ctx.getChild(i)
-            if child.getText() in self.pins_lookup:
-                raise ValueError(f"Pin {child.getText()} is already assigned.")
-
-            if hasattr(child, 'getText') and child.getText().isdigit():
-                self.pins_lookup.append(child.getText())
-                declared_pins.append(child.getText())
-
         if device_type not in self.devices:
             raise ValueError(f"Error: Device type '{device_type}' is not supported. "
                              f"Supported devices: {list(self.devices.keys())}")
+
+        declared_pins = []
+        for i in range(4, ctx.getChildCount()):
+            child = ctx.getChild(i)
+
+            if hasattr(child, 'getText') and child.getText().isdigit():
+                if child.getText() in self.pins_lookup:
+                    raise ValueError(f"Pin {child.getText()} is already assigned.")
+                self.pins_lookup.append(child.getText())
+                declared_pins.append(child.getText())
+
+        expected_pins = self.devices[device_type].get("expected_pins", 0)
+        if len(declared_pins) != expected_pins:
+            raise ValueError(
+                f"Error: Device '{device_name}' of type '{device_type}' requires {expected_pins} pins, but {len(declared_pins)} were provided.")
 
         device_config = self.devices[device_type]
         device_pin_type = device_config["device_type"]
@@ -191,8 +301,47 @@ class CustomListener(SmartHomeStateMachineListener):
         make_ast_subtree(self.ast, ctx, "delay_action", keep_node=True)
 
     def exitDeviceAction(self, ctx:SmartHomeStateMachineParser.DeviceActionContext):
-        if ctx.getChild(0).getText() not in self.devices_lookup.keys():
+        device_name = ctx.getChild(0).getText()
+        method_name = ctx.getChild(2).getText()
+
+        if device_name not in self.devices_lookup.keys():
             raise ValueError(f"Error: Device not declared")
+
+        method_config = self.devices[self.devices_lookup[device_name]]["method_args"].get(method_name,
+                                                                                          {"count": 0, "args": []})
+        expected_arg_count = method_config["count"]
+        argument = ctx.getChildCount() - 5
+        comma_length = argument // 2
+        actual_arg_count = argument - comma_length
+
+        if actual_arg_count != expected_arg_count:
+            raise ValueError(
+                f"Error: Method '{method_name}' on device '{device_name}' expects {expected_arg_count} arguments, but {actual_arg_count} were provided.")
+
+        if actual_arg_count == 0:
+            return
+
+        method_args = method_config.get("args", [])
+        for i in range(actual_arg_count):
+            arg_text = ctx.getChild(2 * i + 4).getText()
+            arg_type = method_args[i].get("type")
+            arg_range = method_args[i].get("range")
+
+            try:
+                if arg_type == "int":
+                    arg_value = int(arg_text)
+                elif arg_type == "float":
+                    arg_value = float(arg_text)
+                else:
+                    continue
+
+                if arg_range and (arg_value < arg_range[0] or arg_value > arg_range[1]):
+                    raise ValueError(
+                        f"Error: Argument {i + 1} of '{method_name}' on device '{device_name}' must be in range {arg_range}, got {arg_value}.")
+            except ValueError:
+                raise ValueError(
+                    f"Error: Argument {i + 1} of '{method_name}' on device '{device_name}' must be a valid {arg_type}, got '{arg_text}'.")
+
         make_ast_subtree(self.ast, ctx, "device_action", keep_node=True)
 
     def exitDeviceType(self, ctx:SmartHomeStateMachineParser.DeviceTypeContext):
@@ -201,18 +350,57 @@ class CustomListener(SmartHomeStateMachineListener):
             raise ValueError(f"Error: Device type '{device}' is not supported. "
                             f"Available types are: {', '.join(self.devices.keys())}")
 
+
+    def exitDeviceCall(self, ctx:SmartHomeStateMachineParser.DeviceCallContext):
+        device_name = ctx.getChild(0).getText()
+        method_name = ctx.getChild(2).getText()
+
+        method_config = self.devices[self.devices_lookup[device_name]]["method_args"].get(method_name, {"count": 0, "args": []})
+        expected_arg_count = method_config["count"]
+        argument = ctx.getChildCount() - 5
+        comma_length = argument // 2
+        actual_arg_count = argument - comma_length
+
+        if actual_arg_count != expected_arg_count:
+            raise ValueError(
+                f"Error: Method '{method_name}' on device '{device_name}' expects {expected_arg_count} arguments, but {actual_arg_count} were provided.")
+
+        if actual_arg_count == 0:
+            return
+
+        method_args = method_config.get("args", [])
+        for i in range(actual_arg_count):
+            arg_text = ctx.getChild(2 * i + 4)
+            arg_type = method_args[i].get("type")
+            arg_range = method_args[i].get("range")
+
+            try:
+                if arg_type == "int":
+                    arg_value = int(arg_text)
+                elif arg_type == "float":
+                    arg_value = float(arg_text)
+                else:
+                    continue
+
+                if arg_range and (arg_value < arg_range[0] or arg_value > arg_range[1]):
+                    raise ValueError(
+                        f"Error: Argument {i + 1} of '{method_name}' on device '{device_name}' must be in range {arg_range}, got {arg_value}.")
+            except ValueError:
+                raise ValueError(
+                    f"Error: Argument {i + 1} of '{method_name}' on device '{device_name}' must be a valid {arg_type}, got '{arg_text}'.")
+
     def exitGetterMethod(self, ctx:SmartHomeStateMachineParser.GetterMethodContext):
         method = ctx.getChild(0).getText()
         device = ctx.parentCtx.getChild(0).getText()
-        if device not in self.devices_lookup.keys() :
+        if device not in self.devices_lookup.keys():
             raise ValueError(f"Error: Device not declared")
-        if method not in self.devices[self.devices_lookup[device]]["getter_methods"] :
+        if method not in self.devices[self.devices_lookup[device]]["getter_methods"]:
             raise ValueError(f"Error: Getter method '{method}' is not supported for '{self.devices_lookup[device]}'. ")
 
     def exitActionMethod(self, ctx:SmartHomeStateMachineParser.GetterMethodContext):
         method = ctx.getChild(0).getText()
         device = ctx.parentCtx.getChild(0).getText()
-        if device not in self.devices_lookup.keys() :
+        if device not in self.devices_lookup.keys():
             raise ValueError(f"Error: Device not declared")
-        if method not in self.devices[self.devices_lookup[device]]["action_methods"] :
+        if method not in self.devices[self.devices_lookup[device]]["action_methods"]:
             raise ValueError(f"Error: Action method '{method}' is not supported for '{self.devices_lookup[device]}'. ")
