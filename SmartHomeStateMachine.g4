@@ -7,7 +7,7 @@ program
 
 // Device Declarations
 deviceDeclaration
-    : 'device' deviceName ':' deviceType ('pin' pinDeclaration)? (',' 'pin' pinDeclaration)*';'
+    : 'device' deviceName ':' deviceType ('pin' pinDeclaration)? (',' pinDeclaration)*';'
     ;
 
 deviceName

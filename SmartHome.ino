@@ -69,13 +69,13 @@ pinMode(4, INPUT);
 }
 
 void state_idle() {
-  digitalWrite(6, LOW);
+  
 }
 void state_s1() {
   analogWrite(6, 191);
   analogWrite(10, 211);
   analogWrite(9, 55);
-  analogWrite(5, 160);
+  analogWrite(5, 255);
 }
 void state_s2() {
   analogWrite(6, 128);

@@ -2,9 +2,9 @@ device mainLED : LED pin 6;
 // device buzzer1 : BUZZER pin 8;
 device tempSensor : TEMPERATURE_SENSOR pin 14;
 device lightSensor : LIGHT_SENSOR pin 15;
-device ultSensor : ULTRASONIC_SENSOR pin 2 , pin 3;
+device ultSensor : ULTRASONIC_SENSOR pin 2 , 3;
 device motionSensor : MOTION_SENSOR pin 4;
-device rgb : RGB_LED pin 10, pin 9, pin 5;
+device rgb : RGB_LED pin 10, 9, 5;
 
 state idle {
     mainLED.off()
@@ -12,7 +12,7 @@ state idle {
 
 state s1 {
     mainLED.setBrightness(75),
-    rgb.setColor(211, 55, 160)
+    rgb.setColor(211, 55, 255)
 }
 
 state s2 {
